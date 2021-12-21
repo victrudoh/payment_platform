@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs') %>
+
+<!-- <div class="index"> -->
+<!-- <div class="indexText"> -->
+<!-- <h1>Reboot</h1> -->
+<!-- </div> -->
+<!-- </div> -->
+
+<main style="height: 83vh; margin-bottom: -20px" class="index">
+  <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6"></div>
+      <div class="col-lg-6">
+        <div
+          class="display-5 fw-bold text-white text-center"
+          style="margin-top: 65px"
+        >
+          Welcome
+        </div>
+        <p class="lead mx-5 text-white text-center">
+          Easiest way to pay electricity bills
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a
+            href="<% if (isAuthenticated) { %>/products<% } else { %>/login<% } %>"
+            class="
+              btn btn-success btn-outline-secondary
+              text-white
+              btn-lg
+              px-4
+              gap-3
+            "
+            >Get started &#8594;</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/footer.ejs') %>

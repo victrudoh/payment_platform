@@ -1,26 +1,49 @@
 <%- include('../partials/header.ejs') %>
- 
-<main style="height: 78vh;">
+
+<main style="height: 86vh; margin-top: 10px">
   <nav id="login">
-  <div class="card">
-    <% if (errorMessage) { %>
-    <div class="user_message user_message_error"><%= errorMessage %></div>
-    <% } %>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-      <div>
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" />
-      </div>
-      <button type="submit" class="btn btn-outline-warning">Login</button>
-      <a href="/" class="btn btn-outline-secondary">Back</a>
-    </form>
-  </div>
-</nav>
+    <div class="card">
+      <% if (errorMessage) { %>
+      <div class="user_message user_message_error"><%= errorMessage %></div>
+      <% } %>
+      <h1 class="my-2" style="color: #005c2f">Sign In</h1>
+      <hr />
+      <form action="/login" method="POST">
+        <div class="my-3">
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            style="border: 2px solid #22be76"
+          />
+        </div>
+        <div class="my-3">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            style="border: 2px solid #02a355"
+          />
+        </div>
+
+        <a href="/" class="fw-bold hoverText" style="margin-bottom: 4px"
+          ><small>Forgot Password?</small></a
+        >
+
+        <button type="submit" class="btn btn-outline-success w-100">
+          Sign In
+        </button>
+        <a href="/" class="btn btn-outline-secondary w-100">Back</a>
+      </form>
+
+      <small class="my-4"
+        >Don't have an account?
+        <a href="/signup" class="hoverText">Sign Up</a></small
+      >
+    </div>
+  </nav>
 </main>
 
 <%- include('../partials/footer.ejs') %>

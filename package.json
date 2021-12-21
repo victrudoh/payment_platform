@@ -1,0 +1,35 @@
+{
+  "name": "Utility_payment_platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victrudoh/payment_platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victrudoh/payment_platform/issues"
+  },
+  "homepage": "https://github.com/victrudoh/payment_platform#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "moment": "^2.29.1",
+    "mongodb": "^4.2.2",
+    "mongoose": "^6.1.2",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}

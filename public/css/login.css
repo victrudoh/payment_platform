@@ -37,63 +37,70 @@
   text-align: center;
 } */
 
-
-
 #login .card {
-    max-width: 400px;
-    margin: 80px auto;
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    border-radius: 10px;
+  max-width: 400px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
 }
 
 #login .card label {
-    display: block;
-    margin: 10px 0;
+  display: block;
+  margin: 10px 0;
 }
 
 #login .card input {
-    width: 100%;
-    padding: 7px;
-    border-radius: 5px;
-    border-width: 1px;
+  width: 100%;
+  padding: 7px;
+  border-radius: 5px;
+  border-width: 1px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background: #eee;
-    border-width: 1px;
-    margin-top: 12px;
-    cursor: pointer;
-    border-radius: 5px;
+  display: inline-block;
+  padding: 10px 15px;
+  background: #eee;
+  border-width: 1px;
+  margin-top: 12px;
+  cursor: pointer;
+  border-radius: 5px;
 }
-.btn a{
-    color: orange;
+.btn a {
+  color: orange;
 }
 
 /* Register Page  */
 
 #register .card label {
-    display: block;
-    margin: 10px 0;
+  display: block;
+  margin: 10px 0;
 }
 
 #register .card {
-    max-width: 400px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 40px 30px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.26);
-    border-radius: 10px;
+  max-width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
 }
 
 #register .card input {
-    width: 100%;
-    padding: 7px;
-    border-radius: 5px;
-    border-width: 1px;
+  width: 100%;
+  padding: 7px;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+.hoverText {
+  color: #009e52b4;
+  text-decoration: none
+}
+
+.hoverText:hover {
+  color: #113021b4;
 }

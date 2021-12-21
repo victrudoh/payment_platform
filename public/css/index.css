@@ -1,0 +1,33 @@
+.index {
+  /* background-image: url("../images/wallpaperflare.com_wallpaper.jpg"); */
+  /* background-image: url("../images/[GetPaidStock.com]-61c1f5d85319b.jpg"); */
+  background-image: url("../images/bulb.jpg");
+  background-size: cover;
+  background-position-y: center;
+  /* margin-bottom: 20px; */
+  /* height: 100vh; */
+  /* overflow: hidden; */
+}
+
+.transparentStuff {
+  background-color: #ffc107;
+  /* opacity: 0.4; */
+}
+
+.indexText {
+  background-color: rgba(82, 40, 82, 0.6);
+  border-radius: 10px;
+  display: block;
+  margin: 15% auto;
+  width: 30%;
+}
+
+.indexText h1 {
+  align-items: center;
+  color: azure;
+  display: flex;
+  font-family: cursive;
+  font-size: 60px;
+  justify-content: center;
+  margin-top: 20%;
+}

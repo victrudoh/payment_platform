@@ -5,21 +5,17 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStoreSession = require("connect-mongodb-session")(session);
-// const csrf = require('csurf');
 const flash = require("connect-flash"); //used to send alerts back to the user
 
-const port = process.env.PORT || 3033;
+const port = process.env.PORT || 4000;
 
-// const MONGODB_URI = "mongodb://localhost:27017/shop";
-const MONGODB_URI =
-  "mongodb+srv://Edikan:pvsantakid@cluster0.7hyxu.mongodb.net/shop";
+const MONGODB_URI = "mongodb://localhost:27017/utility";
 
 const app = express();
 const storeSession = new MongoDBStoreSession({
   uri: MONGODB_URI,
   collection: "sessions",
 });
-// const csrfProtection = csrf();
 
 app.use(flash());
 
@@ -38,7 +34,6 @@ app.use(
     store: storeSession,
   })
 );
-// app.use(csrfProtection);
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -56,17 +51,14 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
-  // res.locals.csrfToken = req.csrfToken();
   next();
 });
 
-const errorController = require("./Controller/error.controller");
-const User = require("./Models/user.model");
+const errorController = require("./controllers/error.controller");
+const User = require("./models/user.model");
 
-const adminRouter = require("./Routes/admin.routes");
-const shopRouter = require("./Routes/shop.routes");
-const authRouter = require("./Routes/auth.routes");
-const cashierRouter = require("./Routes/cashier.routes");
+const authRouter = require("./routes/auth.routes");
+const userRouter = require("./routes/user.routes");
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -80,10 +72,8 @@ app.use((req, res, next) => {
     .catch((err) => console.log(err, "User error in server.js"));
 });
 
-app.use("/", shopRouter);
-app.use("/admin", adminRouter);
 app.use("/", authRouter);
-app.use("/cashier", cashierRouter);
+app.use("/", userRouter);
 
 app.use(errorController.get404);
 

@@ -1,0 +1,145 @@
+
+body {
+  background-color: white;
+  padding: 0;
+  margin-top: 109px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #212529;
+}
+
+main {
+  padding: 2%;
+  margin-top: 70px;
+}
+
+.centered {
+  text-align: center;
+}
+
+/**** HEADER (Nav) ****/
+.main-header {
+  height: 70px;
+  background-color: #212529;
+  top: 0;
+  left: 0;
+  padding: 0 3%;
+}
+
+.main-header_nav {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/**** Nav Left Side ****/
+.main-header_item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.main-header_item {
+  margin: 0 1rem; /* dont ask why i used rem, it worked better */
+  padding: 0;
+}
+
+.main-header_item a {
+  text-decoration: none;
+  color: white;
+}
+
+.main-header_item a:hover,
+.main-header_item a:active,
+.main-header_item a.active {
+  color: #198754;
+}
+
+
+
+/**** Nav Right Side ****/
+.main-header_item-list_right {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-header_item-list_right a {
+  text-decoration: none;
+  color: white;
+  margin-right: 20px;
+}
+
+.main-header_item-list_right a:hover,
+.main-header_item-list_right a:active,
+.main-header_item-list_right a.active {
+  color: #198754;
+}
+
+
+/**** FORM ****/
+.product-form {
+  width: 60%;
+  max-width: 90%;
+  margin: auto;
+}
+
+.form-control {
+  margin: 5px 0px;
+}
+
+.form-control label,
+.form-control select,
+.form-control input,
+.form-control textarea {
+  border-radius: 10px;
+  display: block;
+  height: 25px;
+  margin-bottom: 0.25rem;
+  width: 100%;
+}
+
+.form-control input
+.form-control textarea {
+  border: 1px solid #212529;
+  border-radius: 8px;
+  height: 25px;
+  font: inherit;
+}
+
+.form-control input:focus
+.form-control textarea:focus {
+  outline: #212529;
+  border-radius: inherit;
+}
+
+button {
+  font: inherit;
+  border: 1px solid #212529;
+  background: #212529;
+  color: whitesmoke;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  padding: 3px 5px;
+}
+
+button:hover,
+button:active {
+  background-color: #198754;;
+}
+
+#footer {
+    background: #212529;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
