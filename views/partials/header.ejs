@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/cart.css" />
+    <link rel="stylesheet" href="/css/orders.css" />
+    <link rel="stylesheet" href="/css/product.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/errorMessage.css" />
+    <link rel="stylesheet" href="/css/invoice.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/cashierOrder.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/receipt.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title><%= pageTitle %></title>
+  </head>
+  <body>
+    <header class="main-header navbar-dark fixed-top bg-dark">
+      <nav class="main-header_nav">
+        <ul class="main-header_item-list">
+          <% if (role === 'user' || role === undefined) { %>
+          <li class="main-header_item">
+            <a class="<%= path === 'index' ? 'active' : '' %>" href="/">Home</a>
+          </li>
+          <li class="main-header_item">
+            <a
+              class="<%= path === 'product_list' ? 'active' : '' %>"
+              href="/products"
+              >Products</a
+            >
+          </li>
+          <% } %> <% if (isAuthenticated) { %> <% if (role === 'user') { %>
+          <li class="main-header_item">
+            <a class="<%= path === 'cart' ? 'active' : '' %>" href="/cart"
+              >Cart</a
+            >
+          </li>
+          <li class="main-header_item">
+            <a class="<%= path === 'orders' ? 'active' : '' %>" href="/orders"
+              >Orders</a
+            >
+          </li>
+          <% } %> <% if (role === 'cashier') { %>
+          <!-- <li class="main-header_item">
+            <a
+              class="<%= path === 'orders' ? 'active' : '' %>"
+              href="/cashier/orders"
+              >Cashier Orders</a
+            >
+          </li> -->
+          <li class="main-header_item">
+            <a
+              class="<%= path === 'dashboard' ? 'active' : '' %>"
+              href="/cashier/dashboard"
+              >Dashboard</a
+            >
+          </li>
+          <% } %> <% if (role === 'admin') { %>
+          <li class="main-header_item">
+            <a
+              class="<%= path === 'dashboard' ? 'active' : '' %>"
+              href="/admin/dashboard"
+              >Dashboard</a
+            >
+          </li>
+          <% } %> <% } %>
+        </ul>
+        <ul class="main-header_item-list_right">
+          <% if (!isAuthenticated) { %>
+          <li class="main-header_item_right">
+            <a class="<%= path === 'login' ? 'active' : '' %>" href="/login"
+              >Login</a
+            >
+          </li>
+          <li class="main-header_item_right">
+            <a class="<%= path === 'signup' ? 'active' : '' %>" href="/signup"
+              >Signup</a
+            >
+          </li>
+          <% } else { %>
+            <% if (role === 'user') { %>
+          <li class="main-header_item_right">
+            <a class="<%= path === 'profile' ? 'active' : '' %>" href="/profile"
+              >Profile</a
+            >
+          </li>
+            <% } %>
+          <li class="main-header_item_right">
+            <form action="/logout" method="POST">
+              <button type="submit" class="btn btn-outline-warning my-1" >Log Out</button>
+            </form>
+          </li>
+          <% } %>
+        </ul>
+      </nav>
+    </header>
+

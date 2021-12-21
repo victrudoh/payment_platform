@@ -1,0 +1,99 @@
+/* .login_form_container {
+  background-color: rgba(82, 40, 82, 0.7);
+  border: 2px solid #522852;
+  border-radius: 15px;
+  color: azure;
+  display: block;
+  height: 70%;
+  margin: 3% auto;
+  max-width: 80%;
+  padding: 5px;
+  text-align: center;
+  width: 60%;
+}
+
+.login_form_control {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 7px 6px;
+}
+
+.login_form_control input,
+.login_form_control select {
+  border-radius: 10px;
+  height: 25px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  max-width: 70%;
+  width: 70%;
+}
+
+.login_form_control label {
+  font-weight: bold;
+  margin-bottom: 3px;
+  margin-top: 4px;
+  text-align: center;
+} */
+
+
+
+#login .card {
+    max-width: 400px;
+    margin: 80px auto;
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 10px;
+}
+
+#login .card label {
+    display: block;
+    margin: 10px 0;
+}
+
+#login .card input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #eee;
+    border-width: 1px;
+    margin-top: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.btn a{
+    color: orange;
+}
+
+/* Register Page  */
+
+#register .card label {
+    display: block;
+    margin: 10px 0;
+}
+
+#register .card {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 10px;
+}
+
+#register .card input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border-width: 1px;
+}

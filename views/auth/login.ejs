@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+ 
+<main style="height: 78vh;">
+  <nav id="login">
+  <div class="card">
+    <% if (errorMessage) { %>
+    <div class="user_message user_message_error"><%= errorMessage %></div>
+    <% } %>
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <button type="submit" class="btn btn-outline-warning">Login</button>
+      <a href="/" class="btn btn-outline-secondary">Back</a>
+    </form>
+  </div>
+</nav>
+</main>
+
+<%- include('../partials/footer.ejs') %>
