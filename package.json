@@ -18,16 +18,21 @@
   },
   "homepage": "https://github.com/victrudoh/payment_platform#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
+    "cookie-session": "^2.0.0",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.2",
     "express-session": "^1.17.2",
     "moment": "^2.29.1",
     "mongodb": "^4.2.2",
     "mongoose": "^6.1.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-google-oauth2": "^0.2.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0"

@@ -97,16 +97,18 @@ module.exports = {
     return res.redirect("/login");
   },
 
-  // getProfileController: async (req, res) => {
-  //   const user = await User.findOne({ username: req.user.username });
+  getProfileController: async (req, res) => {
+    const user = await User.findOne({ username: req.user.username });
 
-  //   res.render("auth/profile", {
-  //     pageTitle: "profile",
-  //     path: "profile",
-  //     role: req.user?.role,
-  //     user: user,
-  //   });
-  // },
+    console.log("Display name:   ", req.user.displayName);
+
+    res.render("auth/profile", {
+      pageTitle: "profile",
+      path: "profile",
+      role: req.user?.role,
+      user: user,
+    });
+  },
 
   // getEditProfileController: async (req, res) => {
   //   const user = await User.findOne({ username: req.user.username });
@@ -142,4 +144,45 @@ module.exports = {
 
   //   return res.redirect("/profile");
   // },
+
+  getGoogleLoginController: async (req, res) => {
+    const username = req.user.displayName;
+    const email = req.user.email;
+    const password = req.user.email;
+    const gender = "other";
+    const role = "user";
+    const picture = req.user.photos[0].value;
+
+    const userFound = await User.findOne({ email: email });
+    if (userFound) {
+      req.session.isLoggedIn = true;
+      req.session.user = userFound;
+      return req.session.save((err) => {
+        console.log(err, "postLoginController 2nd log");
+        if (userFound.role === "user") {
+          console.log("this user is: ", userFound.role);
+          res.redirect("/profile");
+        } else if (userFound.role === "admin") {
+          console.log("this user is: ", userFound.role);
+          res.redirect("/admin/dashboard");
+        }
+      });
+    }
+
+    const user = await new User({
+      username: username,
+      email: email,
+      password: password,
+      gender: gender,
+      role: role,
+      picture: picture,
+    });
+
+    const save = await user.save();
+    req.session.isLoggedIn = true;
+    req.session.user = user;
+    await req.session.save();
+
+    return res.redirect("/profile");
+  },
 };

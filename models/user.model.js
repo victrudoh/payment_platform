@@ -25,7 +25,12 @@ const userSchema = new Schema({
   role: {
     type: String,
     required: true
-  }
+  },
+  picture: {
+    type: String,
+    default: "",
+    required: false
+  },
 },
 {
   timestamps: true

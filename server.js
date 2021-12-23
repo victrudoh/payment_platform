@@ -7,6 +7,11 @@ const session = require("express-session");
 const MongoDBStoreSession = require("connect-mongodb-session")(session);
 const flash = require("connect-flash"); //used to send alerts back to the user
 
+require("dotenv").config();
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+require("./middlewares/passport");
+
 const port = process.env.PORT || 4000;
 
 const MONGODB_URI = "mongodb://localhost:27017/utility";
@@ -25,7 +30,7 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs"); // template engine
 app.set("views", path.join(__dirname, "/views")); // setting views directory
-app.use(express.static(path.join(__dirname, "/Public"))); // static files directory
+app.use(express.static(path.join(__dirname, "/public"))); // static files directory
 app.use(
   session({
     secret: "this is the secret of edikan",
@@ -54,11 +59,17 @@ app.use((req, res, next) => {
   next();
 });
 
+// Initializes passport and passport sessions
+app.use(passport.initialize());
+app.use(passport.session());
+
 const errorController = require("./controllers/error.controller");
 const User = require("./models/user.model");
 
 const authRouter = require("./routes/auth.routes");
 const userRouter = require("./routes/user.routes");
+const utilityRouter = require("./routes/utility.routes");
+const orderRouter = require("./routes/order.routes");
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -74,6 +85,8 @@ app.use((req, res, next) => {
 
 app.use("/", authRouter);
 app.use("/", userRouter);
+app.use("/utility", utilityRouter);
+app.use("/", orderRouter);
 
 app.use(errorController.get404);
 

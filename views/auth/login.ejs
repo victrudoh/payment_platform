@@ -1,13 +1,20 @@
 <%- include('../partials/header.ejs') %>
 
-<main style="height: 86vh; margin-top: 10px">
+<main style="height: 90vh; margin-top: 10px; margin-bottom: 60px">
   <nav id="login">
     <div class="card">
       <% if (errorMessage) { %>
       <div class="user_message user_message_error"><%= errorMessage %></div>
       <% } %>
       <h1 class="my-2" style="color: #005c2f">Sign In</h1>
+      <a href="/google" class="btn btn-success"
+        ><span class="fa fa-google-plus"></span> Sign in with Google</a
+      >
+      <a href="#" class="btn btn-success"
+        ><span class="fa fa-apple"></span>   Sign in with Apple</a
+      >
       <hr />
+      
       <form action="/login" method="POST">
         <div class="my-3">
           <input

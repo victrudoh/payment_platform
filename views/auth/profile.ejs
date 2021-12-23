@@ -1,0 +1,35 @@
+<%- include('../partials/header.ejs') %>
+
+<main style="height: 80vh;">
+    <div class="container">
+    <% let image = user?.gender === 'male' ? "/images/img_avatar1.png" : user?.gender === 'female' ? "/images/img_avatar2.png" : "/images/fruit_avatar.png" %>
+    <% user?.picture ? image = user.picture : image = image %>
+    <img src="<%= image %>" alt="Avatar" class="profile_avatar my-4">
+    <form action="/profile" method="post">
+        <input type="hidden" name="userId" value="<%= user?._id %>">
+        <button type="submit" style="border: 1px solid green; margin-right: 100px; border-radius: 10px; padding: 10px;" class="btn btn-outline warning float-end ">Edit profile</button>
+    </form>
+    
+        <h2>Hello, <%= user?.username %></h2>
+        <h3><%= user?.email %></h3>
+        <p><%= user?.physicalAddress %></p>
+        
+
+    <div class="profile_container my-5">
+        <a href="/cart" class="profile_card">
+            <h2>Cart</h2>
+            <h3></h3>
+        </a>
+        <a href="/orders" class="profile_card">
+            <h2>Orders</h2>
+            <h3></h3>
+        </a>
+        <a href="/products" class="profile_card">
+            <h2>Products</h2>
+            <h3></h3>
+        </a>
+    </div>
+    </div>
+</main>
+
+<%- include('../partials/footer.ejs') %>

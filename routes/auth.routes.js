@@ -1,5 +1,9 @@
 const express = require("express");
 const path = require("path");
+
+const passport = require("passport");
+require("../middlewares/passport");
+
 const authController = require("../controllers/auth.controller");
 
 const router = express.Router();
@@ -14,7 +18,19 @@ router.get("/signup", authController.getSignupController);
 
 router.post("/signup", authController.postSignupController);
 
-// router.get("/profile", authController.getProfileController);
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/googleLogin");
+  }
+);
+
+router.get("/googleLogin", authController.getGoogleLoginController);
+
+
+router.get("/profile", authController.getProfileController);
 
 // router.post("/profile", authController.getEditProfileController);
 
