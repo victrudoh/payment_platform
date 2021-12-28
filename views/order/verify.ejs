@@ -1,0 +1,18 @@
+<%- include('../partials/header.ejs') %>
+
+<main style="height: 78vh;">
+    <h1>verification page</h1> <hr>
+    <h3><%= makePayment.response_description %></h3>
+    <h5>Name: <%= makePayment.customerName %></h5>
+    <% if (makePayment.customerAddress == null) { %>
+        <div></div>
+    <% } else { %>
+        <h5>Address: <%= makePayment.customerAddress %></h5>
+    <% } %>
+    <h5>Distributor: <%= makePayment.content.transactions.product_name %></h5>
+    <h5>Amount: <%= makePayment.amount %></h5>
+    <h5>Units: <%= makePayment.PurchasedUnits %></h5>
+    <strong>Token: <h5><%= makePayment.Token %></h5></strong>
+</main>
+
+<%- include('../partials/footer.ejs') %>

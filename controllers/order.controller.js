@@ -2,16 +2,19 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const baseURL = process.env.VTPASS_BASE_URL;
-const username = process.env.VTPASS_USERNAME;
-const password = process.env.VTPASS_PASSWORD;
+const T_Model = require("../models/transaction.model");
 
 module.exports = {
-  getOrderController: async (req, res, next) => {
-    res.render("order/order", {
-      pageTitle: "order",
-      path: "order",
+
+  getHistoryController: async (req, res, next) => {
+
+    const orders = await T_Model.find();
+
+    res.render("order/history", {
+      pageTitle: "Transactions history",
+      path: "history",
       role: req.user?.role,
+      orders,
     });
   },
 

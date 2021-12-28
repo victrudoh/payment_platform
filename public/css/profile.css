@@ -1,57 +1,44 @@
-.profile_avatar {
-  vertical-align: middle;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
+/* body {
+    background: rgb(99, 39, 120)
+} */
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
 }
 
-
-.profile_AdminName {
-    font-size: 40px;
-    margin-right: 8%;
-    margin-bottom: 50px;
-    text-align: right;
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
 }
 
-.profile_container {
-  align-items: stretch;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+.profile-button:hover {
+    background: #682773
 }
 
-.profile_container  a {
-    color: white;
-    text-decoration: none;
-    text-align: center;
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
 }
 
-.profile_card {
-    background-color: #212529;
-    border-radius: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    font-size: large;
-    padding: 20px 6%;
-    width: 20%;
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
 }
 
-.profile_card:hover {
-    background-color: green;
-    color: white;
+.back:hover {
+    color: #682773;
+    cursor: pointer
 }
 
-.profile_card  h2 {
-    font-size: 23px;
-    left: 0;
-    margin-right: 50%;
-    padding-left: 10px;
-    top: 0;
+.labels {
+    font-size: 11px
 }
 
-.profile_card  h3 {
-    bottom: 0;
-    margin-left: 80%;
-    margin-top: 10%;
-    right: 0;
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
 }
-

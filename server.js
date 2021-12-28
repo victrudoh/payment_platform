@@ -70,6 +70,7 @@ const authRouter = require("./routes/auth.routes");
 const userRouter = require("./routes/user.routes");
 const utilityRouter = require("./routes/utility.routes");
 const orderRouter = require("./routes/order.routes");
+const flutterwaveRouter = require("./routes/flutterwave.routes");
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -85,8 +86,9 @@ app.use((req, res, next) => {
 
 app.use("/", authRouter);
 app.use("/", userRouter);
-app.use("/utility", utilityRouter);
 app.use("/", orderRouter);
+app.use("/utility", utilityRouter);
+app.use("/payment", flutterwaveRouter);
 
 app.use(errorController.get404);
 

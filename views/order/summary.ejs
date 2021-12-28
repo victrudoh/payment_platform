@@ -1,31 +1,56 @@
 <%- include('../partials/header.ejs') %>
 
-<main style="height: 86vh; margin-top: 23px; margin-bottom: 10px;">
+<main style="height: 95vh; margin-top: 23px; margin-bottom: 120px">
   <div id="register">
-  <div class="card">
-    <h1 style="color: #005c2f">Payment Summary</h1> <hr>
-    <form action="/summary" method="POST">
-       
-        METER NUMBER
-        <h4 style="color: #005c2f"> put meter number here </h4>
-        METER TYPE
-        <h4 style="color: #005c2f"> put meter type </h4>
-         CITY
-        <h4 style="color: #005c2f">put city here</h4>
-        PHONE NUMBER
-        <h4 style="color: #005c2f"> 080 blah blah blah </h4>
-        AMOUNT
-        <h4 style="color: #005c2f"> N 2000 kobo naira </h4>
-        
-      <div>
-        <input type="hidden" name="role" id="role" value="user" />
-      </div>
-      <button type="submit" class="btn btn-outline-success w-100">complete</button>
-      <a href="/utility/review" class="btn btn-outline-secondary w-100" >Back</a>
-      <p style ="text-align: center;">By Clicking Complete, You Agree To Pay The Amount Stated Above.</p>
-    </form>
+    <div class="card">
+      <h1 style="color: #005c2f">Payment Summary</h1>
+      <hr />
+      <form action="/summary" method="POST">
+        <div class="my-3">
+          METER NUMBER
+          <input
+            type="hidden"
+            name="billersCode"
+            value="<%= payload.billersCode %>"
+          />
+          <h4 style="color: #005c2f"><%= payload.billersCode %></h4>
+        </div>
+        <div class="my-3">
+          METER TYPE
+          <input type="hidden" name="type" value="<%= payload.type %>" />
+          <h4 style="color: #005c2f"><%= payload.type %></h4>
+        </div>
+        <div class="my-3">
+          DISTRICT
+          <input
+            type="hidden"
+            name="serviceID"
+            value="<%= payload.serviceID %>"
+          />
+          <h4 style="color: #005c2f"><%= payload.serviceID %></h4>
+        </div>
+        <div class="my-3">
+          PHONE NUMBER
+          <input type="hidden" name="phone" value="<%= payload.phone %>" />
+          <h4 style="color: #005c2f"><%= payload.phone %></h4>
+        </div>
+        <div class="my-3">
+          AMOUNT
+          <input type="hidden" name="amount" value="<%= payload.amount %>" />
+          <h4 style="color: #005c2f">₦<%= payload.amount %></h4>
+        </div>
+        <button type="submit" class="btn btn-outline-success w-100">
+          complete
+        </button>
+        <a href="/utility/review" class="btn btn-outline-secondary w-100"
+          >Back</a
+        >
+        <p style="text-align: center">
+          By Clicking Complete, You Agree To Pay The Amount Stated Above.
+        </p>
+      </form>
+    </div>
   </div>
 </main>
- 
- 
-</div>
+
+<%- include('../partials/footer.ejs') %>

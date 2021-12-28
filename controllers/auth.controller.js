@@ -98,6 +98,14 @@ module.exports = {
   },
 
   getProfileController: async (req, res) => {
+    let message = req.flash("error");
+    //so the error message box will not always be active
+    if (message.length > 0) {
+      message = message[0];
+    } else {
+      message = null;
+    }
+
     const user = await User.findOne({ username: req.user.username });
 
     console.log("Display name:   ", req.user.displayName);
@@ -107,7 +115,37 @@ module.exports = {
       path: "profile",
       role: req.user?.role,
       user: user,
+      errorMessage: message,
     });
+  },
+
+  postUpdateProfileController: async (req, res, next) => {
+    const user_id = req.body.user_id;
+    const username = req.body.username;
+    const email = req.body.email;
+    // const password = req.body.password;
+    const gender = req.body.gender;
+    const phone = req.body.phone;
+
+    if (!username || !email || !gender || !phone) {
+      console.log("Missing field...");
+      req.flash("error", "Please provide all the available fields");
+      return res.redirect("/profile");
+    }
+
+    const user = await User.findById(user_id);
+
+    user.username = username;
+    user.email = email;
+    user.password = user.password;
+    user.gender = gender;
+    user.phone = phone;
+    user.role = "user";
+
+    await user.save();
+    console.log("User profile Updated....");
+
+    return res.redirect("/profile");
   },
 
   // getEditProfileController: async (req, res) => {

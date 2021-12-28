@@ -16,4 +16,12 @@ module.exports = {
       role: req.user?.role,
     });
   },
+
+  getFaqController: async (req, res, next) => {
+    res.render("user/faq", {
+      pageTitle: "FAQ",
+      path: "faq",
+      role: req.user?.role,
+    });
+  },
 };

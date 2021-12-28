@@ -1,41 +1,46 @@
 <%- include('../partials/header.ejs') %>
 
-<main style="height: 86vh; margin-top: 54px; margin-bottom: 10px;">
+<main style="height: 110vh; margin-top: 34px; margin-bottom: 30px">
   <div id="register">
-  <div class="card">
-    <% if (errorMessage) { %>
-    <div class="user_message user_message_error"><%= errorMessage %></div>
-    <% } %>    
-    <h1 style="color: #005c2f">Order Electricity</h1> <hr>
-    <form action="/utility/order" method="POST">
-      <div class="my-3">
-        <input type="number" name="billersCode" id="billersCode" placeholder="Meter Number" style="border: 2px solid #02a355" />
-      </div>
-      <div class="my-3">
-        <select name="serviceID" id="serviceID" class="w-100 mb-2" style="height: 45px; border-radius: 5px; border: 2px solid #02a355">
-          <option >Select Service Provider</option>
-          <option value="ikeja-electric">IKEDC - Ikeja Electricity DC</option>
-          <option value="eko-electric">EKEDC - Eko Electricity DC</option>
-          <option value="kano-electric">KEDCO - Kano Electricity DC</option>
-          <option value="portharcourt-electric">PHED - Port Harcourt Electricity DC</option>
-          <option value="jos-electric">JED - Jos Electricity DC</option>
-          <option value="ibadan-electric">IBEDC - Ibadan Electricity DC</option>
-          <option value="kaduna-electric">KAEDCO - Kaduna Electricity DC</option>
-          <option value="abuja-electric">AEDC - Abuja Electricity DC</option>
-        </select>
-      </div>
-      <div class="my-3">
-        <select name="type" id="type" class="w-100 mb-2" style="height: 45px; border-radius: 5px; border: 2px solid #02a355">
-          <option>Meter Type</option>
-          <option value="prepaid">Prepaid</option>
-          <option value="postpaid">Postpaid</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-outline-success w-100">Proceed</button>
-      <a href="/" class="btn btn-outline-secondary w-100">Back</a>
-    </form>
+    <div class="card">
+      <h1 style="color: #005c2f">Order Electricity</h1>
+      <hr />
+      <form action="/utility/pay" method="POST">
+        
+        <div class="my-3">
+         <h5> <small>Name: </small> <%= details.Customer_Name %></h5>
+          <input type="hidden" name="name" id="name" value="<%= details.Customer_Name %>" style="border: 2px solid #02a355" />
+        </div>
+        <div class="my-3">
+          <h5><small>Meter Number: </small><%= details.Meter_Number %></h5>
+          <input type="hidden" name="meter_no" id="meter_no" value="<%= details.Meter_Number %>" style="border: 2px solid #02a355" />
+        </div>
+        <div class="my-3">
+          <h5><small>Email: </small><%= user.email %></h5>
+          <input type="hidden" name="email" id="email" value="<%= user.email %>" style="border: 2px solid #02a355" />
+        </div>
+        <div class="my-3">
+          <h5><small>Phone No.: </small><%= user.phone %></h5>
+          <input type="hidden" name="phone" id="phone" value="<%= user.phone %>" style="border: 2px solid #02a355" />
+        </div>
+        <div class="my-3">
+          <input type="number" name="amount" id="amount" placeholder="Enter Amount" style="border: 2px solid #02a355" />
+        </div>
+        <!-- serviceID -->
+        <input type="hidden" name="serviceID" id="serviceID" value="<%= serviceID %>" />
+        <!-- billersCode -->
+        <input type="hidden" name="billersCode" id="billersCode" value="<%= billersCode %>" />
+        <!-- meterType -->
+        <input type="hidden" name="meterType" id="meterType" value="<%= type %>" />
+        <!-- user_ID -->
+        <input type="hidden" name="user_id" id="user_id" value="<%= user._id %>" />
+        <button type="submit" class="btn btn-outline-success w-100">
+          Proceed
+        </button>
+        <a href="/" class="btn btn-outline-secondary w-100">Back</a>
+      </form>
+    </div>
   </div>
-</div>
 </main>
 
 <%- include('../partials/footer.ejs') %>

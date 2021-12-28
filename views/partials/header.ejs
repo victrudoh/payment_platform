@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="/css/profile.css" />
     <link rel="stylesheet" href="/css/receipt.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/nicepage.css" />
+    <link rel="stylesheet" href="/css/Page-11.css" />
 
     <link
       rel="stylesheet"
@@ -33,6 +35,9 @@
           <li class="main-header_item">
             <a class="<%= path === 'index' ? 'active' : '' %>" href="/">Home</a>
           </li>
+          <li class="main-header_item">
+            <a class="<%= path === 'faq' ? 'active' : '' %>" href="/faq">FAQ</a>
+          </li>
           <!-- <li class="main-header_item">
             <a
               class="<%= path === 'product_list' ? 'active' : '' %>"
@@ -42,13 +47,15 @@
           </li> -->
           <% } %> <% if (isAuthenticated) { %> <% if (role === 'user') { %>
           <li class="main-header_item">
-            <a class="<%= path === 'cart' ? 'active' : '' %>" href="/cart"
-              >Cart</a
+            <a
+              class="<%= path === 'order' ? 'active' : '' %>"
+              href="/utility/details"
+              >Buy Electricity</a
             >
           </li>
           <li class="main-header_item">
-            <a class="<%= path === 'orders' ? 'active' : '' %>" href="/orders"
-              >Orders</a
+            <a class="<%= path === 'history' ? 'active' : '' %>" href="/history"
+              >History</a
             >
           </li>
           <% } %> <% if (role === 'cashier') { %>

@@ -4,20 +4,15 @@ const payloadContent = require("../middlewares/orderPayload");
 
 const router = express.Router();
 
-router.get("/order", utilityController.getOrderController);
+router.get("/details", utilityController.getDetailsController)
+;
 
-router.post("/order", utilityController.postOrderController);
+router.post("/buy", utilityController.postBuyController);
 
-router.get("/review", utilityController.getReviewController);
+router.post("/pay", utilityController.postPayController);
 
-router.post("/review", utilityController.postReviewController);
+router.get("/verify", utilityController.getVerifyController);
 
-// router.get("/prepaid", utilityController.getOrderController);
-
-// router.post("/prepaid", utilityController.getPrepaidMeterPaymentController);
-
-router.get("/postpaid", utilityController.getOrderController);
-
-router.post("/postpaid", utilityController.getPostpaidMeterPaymentController);
+// router.post("/summary", utilityController.postSummaryController);
 
 module.exports = router;

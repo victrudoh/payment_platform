@@ -1,0 +1,47 @@
+<%- include('../partials/header.ejs') %>
+
+<main>
+  <div class="">
+    <form action="/orders" method="POST">
+        <label for="paymentOption" class="mt-2">Sort by:</label>
+        <select name="paymentOption" id="paymentOption" class="mb-3" required>
+          <option>Choose option</option>
+          <option value="prepaid">Transaction type: Prepaid</option>
+          <option value="postpaid">Transaction type: Postpaid</option>
+        </select>
+      <button type="submit" class="btn btn-outline-secondary my-1">Sort</button>
+    </form>
+  </div>
+  <br />
+  <% if (orders.length <= 0) { %>
+  <h1>Nothing there!</h1>
+  <% } else { %>
+  <ul class="orders">
+    <% orders.forEach(order => { %>
+    <li class="orders__item">
+        <h3>Token - # <%= order.token %></h3> <hr>
+        <div class="spaceBetween">
+          <div><h6> Transaction Date:</h6></div>
+          <h6><%= order.createdAt %></h6>
+        </div>
+        <div class="spaceBetween">
+          <div><h6>Transaction Type:</h6></div>
+          <h6><%= order.meterType %></h6>
+        </div>
+        <div class="spaceBetween">
+          <div><h6>Transaction Status:</h6></div>
+          <h6><%= order.status %></h6>
+        </div>
+        <div class="spaceBetween">
+          <div><h6>Total Amount</h6></div>
+          <h6><%= order.amount %></h6>
+        </div>
+          <!-- <a href="/receipt/<%= order._id %>" class="btn btn-outline-secondary">Generate receipt</a> -->
+    </li>
+    <% }); %>
+  </ul>
+  <% } %>
+
+</main>
+
+<%- include('../partials/footer.ejs') %>

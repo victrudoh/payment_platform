@@ -1,34 +1,39 @@
 <%- include('../partials/header.ejs') %>
 
-<main style="height: 86vh; margin-top: 54px; margin-bottom: 10px;">
+<main style="height: 90vh; margin-top: 34px; margin-bottom: 20px;">
   <div id="register">
   <div class="card">
     <h1 style="color: #005c2f">Review Order</h1> <hr>
-    <form action="/utility/review" method="POST">
-        CITY
-        <h4 style="color: #005c2f">put city here</h4>
-        METER NUMBER
-        <h4 style="color: #005c2f"> put meter number here </h4>
-        METER TYPE
-        <h4 style="color: #005c2f"> put meter type </h4>
+
+    <form action="/utility/summary" method="POST">
+        <div class="my-3">
+          DISTRICT
+          <input type="hidden" name="serviceID" value="<%= payload.serviceID %>">
+          <h4 style="color: #005c2f"><%= payload.serviceID %></h4>
+        </div>
+        <div class="my-3">
+          METER NUMBER
+          <input type="hidden" name="billersCode" value="<%= payload.billersCode %>">
+          <h4 style="color: #005c2f"><%= payload.billersCode %></h4>
+        </div>
+        <div class="my-3">
+          METER TYPE
+          <input type="hidden" name="type" value="<%= payload.type %>">
+          <h4 style="color: #005c2f"><%= payload.type %></h4>
+        </div>
 
       <div class="my-3">
-        <!-- <label for="password">Password:</label> -->
         <input type="number" name="amount" id="amount" placeholder="Amount (Naira)" style="border: 2px solid #02a355" />
       </div>
         
       <div class="my-3">
-        <!-- <label for="password">Password:</label> -->
         <input type="number" name="phone" id="phone" placeholder="Phone Number" style="border: 2px solid #02a355" />
-      </div>
-      <div>
-        <input type="hidden" name="role" id="role" value="user" />
       </div>
       <button type="submit" class="btn btn-outline-success w-100">SUMMARY</button>
       <a href="/utility/order" class="btn btn-outline-secondary w-100" >Back</a>
     </form>
   </div>
+</div>
 </main>
 
   <%- include('../partials/footer.ejs') %>
-</div>

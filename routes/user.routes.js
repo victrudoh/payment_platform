@@ -6,5 +6,5 @@ const userController = require("../controllers/user.controller");
 const router = express.Router();
 
 router.get("/", userController.getIndexController);
-
+router.get("/faq", userController.getFaqController);
 module.exports = router;

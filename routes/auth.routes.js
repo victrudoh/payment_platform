@@ -32,6 +32,8 @@ router.get("/googleLogin", authController.getGoogleLoginController);
 
 router.get("/profile", authController.getProfileController);
 
+router.post("/profile_update", authController.postUpdateProfileController);
+
 // router.post("/profile", authController.getEditProfileController);
 
 // router.post("/edit_profile", authController.postEditProfileController);

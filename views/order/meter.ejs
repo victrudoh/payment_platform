@@ -1,0 +1,58 @@
+<%- include('../partials/header.ejs') %>
+
+<main style="height: 110vh; margin-top: 34px; margin-bottom: 30px">
+  <div id="register">
+    <div class="card">
+        <h1 style="color: #005c2f">Order Electricity</h1>
+        <hr />
+        <% if (errorMessage) { %>
+        <div class="user_message user_message_error"><%= errorMessage %></div>
+        <% } %>
+      <form action="/utility/buy" method="POST">
+        <div class="my-3">
+          <input
+            type="text"
+            name="meter_no"
+            id="meter_no"
+            placeholder="Enter meter number"
+            style="border: 2px solid #02a355"
+          />
+        </div>
+        <div class="my-3">
+          <select
+            name="serviceID"
+            id="serviceID"
+            class="w-100 mb-2"
+            style="height: 45px; border-radius: 5px; border: 2px solid #02a355"
+          >
+            <option>Select Service Provider</option>
+            <% for (let i = 0; i < distributors.length; i++) { %>
+            <option value="<%= distributors[i].serviceID %>">
+              <%= distributors[i].name %>
+            </option>
+            <% } %>
+          </select>
+        </div>
+        <div class="my-3">
+          <select
+            name="type"
+            id="type"
+            class="w-100 mb-2"
+            style="height: 45px; border-radius: 5px; border: 2px solid #02a355"
+          >
+            <option>Meter Type</option>
+            <option value="prepaid">Prepaid</option>
+            <option value="postpaid">Postpaid</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-outline-success w-100">
+          Proceed
+        </button>
+        <a href="/" class="btn btn-outline-secondary w-100">Back</a>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/footer.ejs') %>
