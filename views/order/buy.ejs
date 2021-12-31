@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs') %>
 
-<main style="height: 110vh; margin-top: 34px; margin-bottom: 30px">
+<main >
   <div id="register">
     <div class="card">
       <h1 style="color: #005c2f">Purchase <br> Amount</h1>
@@ -37,12 +37,11 @@
           />
         </div>
         <div class="my-3">
-          <h5><small>Phone No.: </small><%= user.phone %></h5>
           <input
-            type="hidden"
+            type="text"
             name="phone"
             id="phone"
-            value="<%= user.phone %>"
+            placeholder="Enter phone number"
             style="border: 2px solid #02a355"
           />
         </div>

@@ -8,15 +8,16 @@ const VTP_services = require("../services/vtpass.services");
 const User = require("../models/user.model");
 const T_Model = require("../models/transaction.model");
 
+const tx_ref = require("../middlewares/tx_ref");
+
 //generate random IDs for flutterwave tx_ref
-const time = moment().format("YYYY-MM-DD hh:mm:ss");
-const rand = Math.floor(Math.random() * Date.now());
-const rand1 = Math.floor(Math.random() * Date.now());
-const ref = time.replace(/[\-]|[\s]|[\:]/g, "") | rand;
-const tx_ref = ref + rand1;
+// const time = moment().format("YYYY-MM-DD hh:mm:ss");
+// const rand = Math.floor(Math.random() * Date.now());
+// const rand1 = Math.floor(Math.random() * Date.now());
+// const ref = time.replace(/[\-]|[\s]|[\:]/g, "") | rand;
+// const tx_ref = ref + rand1;
 
 module.exports = {
-
   getDetailsController: async (req, res, next) => {
     let message = req.flash("error");
     if (message.length > 0) {
@@ -83,7 +84,7 @@ module.exports = {
     const currency = "NGN";
     const amount = parseInt(req.body.amount);
     const newAmount = amount + 100;
-    // console.log("🚀line 44 ~ postReviewController: ~ newAmount", newAmount);
+    const tx_ref = tx_ref();
 
     const payload = {
       tx_ref: tx_ref,
@@ -132,7 +133,6 @@ module.exports = {
 
     // console.log("🚀...response: ", response);
     return res.redirect(response);
-
   },
 
   getVerifyController: async (req, res, next) => {
@@ -158,7 +158,7 @@ module.exports = {
     };
 
     const makePayment = await VTP_services.makePayment(payload);
-    console.log("makePayment", makePayment)
+    console.log("makePayment", makePayment);
 
     const token = makePayment.Token;
     const newStatus = makePayment.content.transactions.status;
@@ -167,7 +167,6 @@ module.exports = {
     transaction.status = newStatus;
     await transaction.save();
 
-
     res.render("order/verify", {
       pageTitle: "Verify Payment",
       path: "summary",
@@ -175,5 +174,4 @@ module.exports = {
       makePayment,
     });
   },
-  
 };
