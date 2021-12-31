@@ -113,7 +113,7 @@ module.exports = {
     res.render("auth/profile", {
       pageTitle: "profile",
       path: "profile",
-      role: req.user?.role,
+      role: req.user?req.user.role:"",
       user: user,
       errorMessage: message,
     });
@@ -122,14 +122,17 @@ module.exports = {
   postUpdateProfileController: async (req, res, next) => {
     const user_id = req.body.user_id;
     const username = req.body.username;
+    console.log("username", username);
     const email = req.body.email;
     // const password = req.body.password;
     const gender = req.body.gender;
     const phone = req.body.phone;
 
-    if (!username || !email || !gender || !phone) {
-      console.log("Missing field...");
-      req.flash("error", "Please provide all the available fields");
+    if (!gender) {
+      req.flash("error", "Please specify gender");
+      return res.redirect("/profile");
+    } else if (!phone) {
+      req.flash("error", "Please enter phone number");
       return res.redirect("/profile");
     }
 

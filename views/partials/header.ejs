@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/login.css" />
     <link rel="stylesheet" href="/css/errorMessage.css" />
     <link rel="stylesheet" href="/css/invoice.css" />
-    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="/css/cashierOrder.css" />
     <link rel="stylesheet" href="/css/dashboard.css" />
     <link rel="stylesheet" href="/css/profile.css" />
@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/nicepage.css" />
     <link rel="stylesheet" href="/css/Page-11.css" />
+    <link rel="stylesheet" href="/css/faqcss.css" />
+
 
     <link
       rel="stylesheet"
@@ -38,19 +40,13 @@
           <li class="main-header_item">
             <a class="<%= path === 'faq' ? 'active' : '' %>" href="/faq">FAQ</a>
           </li>
-          <!-- <li class="main-header_item">
-            <a
-              class="<%= path === 'product_list' ? 'active' : '' %>"
-              href="/products"
-              >Products</a
-            >
-          </li> -->
+         
           <% } %> <% if (isAuthenticated) { %> <% if (role === 'user') { %>
           <li class="main-header_item">
             <a
               class="<%= path === 'order' ? 'active' : '' %>"
               href="/utility/details"
-              >Buy Electricity</a
+              >Buy&#x26a1; </a
             >
           </li>
           <li class="main-header_item">

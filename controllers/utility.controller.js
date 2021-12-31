@@ -27,7 +27,7 @@ module.exports = {
 
     const distributors = await VTP_services.getServiceID();
 
-    res.render("order/meter", {
+    res.render("order/meterDetails", {
       pageTitle: "order",
       path: "order",
       role: req.user?.role,
@@ -41,6 +41,8 @@ module.exports = {
     const serviceID = req.body.serviceID;
     const type = req.body.type;
 
+    console.log("JUST CHECKING: ", req.body);
+
     const payload = {
       billersCode,
       serviceID,
@@ -51,13 +53,21 @@ module.exports = {
 
     const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
 
-    if (verifyMeterNumber.error) {
-      // console.log("Error");
+    if (serviceID === "Select Service Provider") {
+      console.log("no service ID");
+      req.flash("error", "Please Select Service Provider");
+      return res.redirect("/utility/details");
+    } else if (type === "Meter Type") {
+      console.log("no metere type");
+      req.flash("error", "Please Select meter type");
+      return res.redirect("/utility/details");
+    } else if (verifyMeterNumber.error) {
+      console.log(verifyMeterNumber.error);
       req.flash("error", "Invalid Meter Number. Please check and Try Again");
       return res.redirect("/utility/details");
     }
 
-    res.render("order/order", {
+    res.render("order/buy", {
       pageTitle: "order",
       path: "order",
       role: req.user?.role,

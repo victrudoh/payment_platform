@@ -14,7 +14,9 @@ require("./middlewares/passport");
 
 const port = process.env.PORT || 4000;
 
-const MONGODB_URI = "mongodb://localhost:27017/utility";
+// const MONGODB_URI = "mongodb://localhost:27017/utility";
+const MONGODB_URI =
+  "mongodb+srv://Edikan:pvsantakid@cluster0.qls1f.mongodb.net/utility";
 
 const app = express();
 const storeSession = new MongoDBStoreSession({

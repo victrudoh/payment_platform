@@ -1,4 +1,4 @@
-const userModel = require("../Models/user.model");
+const userModel = require("../models/user.model");
 
 module.exports = {
   get404: (req, res, next) => {

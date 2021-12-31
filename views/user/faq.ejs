@@ -1,66 +1,390 @@
 <%- include('../partials/header.ejs') %>
 
-
-  <body class="u-body" style="margin-top: 50px;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="u-body" style="margin-top: 50px;">
     <section class="u-align-left u-clearfix u-section-1" id="carousel_89b0">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-text u-text-1"  style="color: #005c2f" >FAQs</h2>
-        <div class="u-accordion u-expanded-width u-faq u-spacing-20 u-accordion-1">
-          <div class="u-accordion-item">
-            <a class="active u-accordion-link u-active-grey-5 u-border-2 u-border-active-palette-1-base u-border-hover-palette-5-dark-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-2 u-button-style u-text-body-color u-accordion-link-1" id="link-accordion-6327" aria-controls="accordion-6327" aria-selected="true">
-              <span class="u-accordion-link-text">What's included in the quoted daily rate?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-black u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xlink:href="#svg-2c6d"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-2c6d" style=""><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6 c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
-            </a>
-            <div class="u-accordion-active u-accordion-pane u-container-style u-accordion-pane-1" id="accordion-6327" aria-labelledby="link-accordion-6327">
-              <div class="u-container-layout u-container-layout-1">
-                <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. Phasellus sed efficitur dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur. Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet.</p>
-                </div>
-              </div>
-            </div>
+        <h2 class="u-text u-text-1"  style="color: #005c2f">FAQs</h2>
+<br>
+  <div class="wrapper">    
+    
+    <!-- Payment Accordion [Heading one] -->
+    <div class="parent-tab tab-1">
+      <input type="radio" name="tab" id="tab-1">
+      <label for="tab-1" class="tab-1">
+        <span>Payments Frequently Asked Questions</span>
+        <div class="icon"><i class="fas fa-plus"></i></div>
+      </label>
+      <div class="content">
+        <!-- payment Sub Heading One -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-a">
+          <label for="tab-a">
+            <span>What payment options are available?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <ul>
+              <li>Card Payment</li>
+              <li>USSD</li>
+              <li>BANK TRANSFER</li>
+              <li>Mvisa-QR</li>
+              <li>Barter</li>
+              <li>Migo</li>
+              <li>PayAttitude</li>
+            </p>
           </div>
-          <div class="u-accordion-item">
-            <a class="u-accordion-link u-active-grey-5 u-border-2 u-border-active-palette-1-base u-border-hover-palette-5-dark-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-2 u-button-style u-text-body-color u-accordion-link-2" id="link-accordion-4aab" aria-controls="accordion-4aab" aria-selected="false">
-              <span class="u-accordion-link-text">What is the rental's mileage plan?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-black u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xlink:href="#svg-937a"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-937a" style=""><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
-	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
-            </a>
-            <div class="u-accordion-pane u-container-style u-accordion-pane-2" id="accordion-4aab" aria-labelledby="link-accordion-4aab">
-              <div class="u-container-layout u-container-layout-2">
-                <div class="u-clearfix u-rich-text u-text">
-                  <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. Phasellus sed efficitur dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur. Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet.</p>
-                </div>
-              </div>
-            </div>
+        </div>
+        <!-- payment sub Heading Two -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-b">
+          <label for="tab-b">
+            <span>What happens if my Card doesn't work?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+              <ul>
+                <li> Kindly register your card for online transactions. There is a 90% chance your card would work.
+                     Check that You entered all card information correctly?</li>
+                <li> You filled in the required card information (Card number, CVV- last three digits behind your card, Expiry date-      
+                      month and year)?
+                </li>
+                <li> Try with a different browser or device.</li>
+              </ul>
+            
           </div>
-          <div class="u-accordion-item">
-            <a class="u-accordion-link u-active-grey-5 u-border-2 u-border-active-palette-1-base u-border-hover-palette-5-dark-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-2 u-button-style u-text-body-color u-accordion-link-3" id="link-accordion-eb1f" aria-controls="accordion-eb1f" aria-selected="false">
-              <span class="u-accordion-link-text">What are your extra insurance options?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-black u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xlink:href="#svg-4086"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-4086" style=""><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
-	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
-            </a>
-            <div class="u-accordion-pane u-container-style u-accordion-pane-3" id="accordion-eb1f" aria-labelledby="link-accordion-eb1f">
-              <div class="u-container-layout u-container-layout-3">
-                <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. Phasellus sed efficitur dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur. Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet.</p>
-                </div>
-              </div>
-            </div>
+        </div>
+        <!-- payment subheading three -->
+         <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-c">
+          <label for="tab-c">
+            <span>Where to call if I have questions about my bill?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+             <p>You can reach our customer care on 08094554050</p>            
           </div>
-          <div class="u-accordion-item u-expanded-width">
-            <a class="u-accordion-link u-active-grey-5 u-border-2 u-border-active-palette-1-base u-border-hover-palette-5-dark-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-2 u-button-style u-text-body-color u-accordion-link-4" id="link-accordion-eb1f" aria-controls="accordion-eb1f" aria-selected="false">
-              <span class="u-accordion-link-text">Do I need to return the rental with a full tank?</span><span class="u-accordion-link-icon u-icon u-icon-circle u-text-black u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 16 16" style=""><use xlink:href="#svg-df61"></use></svg><svg class="u-svg-content" viewBox="0 0 16 16" x="0px" y="0px" id="svg-df61" style=""><path d="M8,10.7L1.6,5.3c-0.4-0.4-1-0.4-1.3,0c-0.4,0.4-0.4,0.9,0,1.3l7.2,6.1c0.1,0.1,0.4,0.2,0.6,0.2s0.4-0.1,0.6-0.2l7.1-6
-	c0.4-0.4,0.4-0.9,0-1.3c-0.4-0.4-1-0.4-1.3,0L8,10.7z"></path></svg></span>
-            </a>
-            <div class="u-accordion-pane u-container-style u-accordion-pane-4" id="accordion-eb1f" aria-labelledby="link-accordion-eb1f">
-              <div class="u-container-layout u-container-layout-4">
-                <div class="fr-view u-clearfix u-rich-text u-text">
-                  <p>Answer. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. Phasellus sed efficitur dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur. Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet.</p>
-                </div>
-              </div>
-            </div>
+        </div>
+
+        <!-- payment Subheading four-->
+         <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-d">
+          <label for="tab-d">
+            <span>Where Can I Get My Payment History</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+              <ul>
+                <li>Log Into Your Account,</li>
+                <li> Click On "History" On The Top Bar.</li>
+                <li> All Transactions For Your Account Are Listed From Last To First.</li>
+                <li> Click On "Sort-By" To Rearrange The Order In which Transactions Appear.</li>
+              </ul>
+            
+          </div>
+        </div>
+
+        <!-- payment Subheading five -->
+         <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-e">
+          <label for="tab-e">
+            <span>How can I buy electricity?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+              <ul>
+                <li> New users need to create an account on the "sign up" page, fill in your name, email address (optional), preferred password and click on “Sign-up”. Your login details are automatically saved for the next time you purchase electricity on the same device (phone, computer etc). As a returning user on another device, login using your registered mobile number and password.</li>
+                <li> Once you login, click on the "buy electricity" option on the top tab</li>
+                <li> input your meter number and select your service provider; select your meter type, click proceed</li>
+                <li>select the amount you wish to buy.</li>
+                <li> select payment type (Mastercard/visa card, verve card, bank transfer) and click on continue to process payment
+                </li>
+                <li> after transaction has been verified, a token would be generated and displayed for you</li>
+              </ul>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    
+    <!-- Token Accordion [Heading two] -->
+    <div class="parent-tab tab-2">
+      <input type="radio" name="tab" id="tab-2">
+      <label for="tab-2" class="tab-2">
+        <span>Token Frequently Asked Questions</span>
+        <div class="icon"><i class="fas fa-plus"></i></div>
+      </label>
+      <div class="content">
+        <!-- Token Sub Heading One -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-f">
+          <label for="tab-f">
+            <span>My state is not on the list</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>Kindly contact our 24-hour support team on 08094483939 or send us an email at support@test.com</p>
+          </div>
+        </div>
+        <!-- Token Sub Heading Two -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-g">
+          <label for="tab-g">
+            <span>What do I do if my token is not generated after payment?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>Kindly contact our 24-hour support team on 08093993049 or send us an email at support@test.com</p>
+          </div>
+        </div>
+        <!-- Token Sub Heading three -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-h">
+          <label for="tab-h">
+            <span>Why did my transaction fail?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>
+              <ul>
+                Transaction can fail:
+                <li>As a result of bank network issues.</li>
+                <li>because Your Bank (Issuer) might have been inoperative at the point of payment.</li>
+                for more info, Kindly contact our 24-hour support team on 08094484990 or send us an email at support@test.com
+              </ul>
+            </p>
+          </div>
+        </div>
+      
+        <!-- Token Sub Heading four-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-i">
+          <label for="tab-i">
+            <span>Can i purchase electricity for other meters using one account?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p> Yes, all you have to do is change the meter number and process payment </p>
+          </div>
+        </div>
+      
+        <!-- Token Sub Heading five -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-j">
+          <label for="tab-j">
+            <span>Can I buy token at any time?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p> Yes, our services are available 24/7 </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Account Accordion [Heading three] -->
+    <div class="parent-tab tab-3">
+      <input type="radio" name="tab" id="tab-3">
+      <label for="tab-3" class="tab-3">
+        <span>Account Frequently Asked Questions</span>
+        <div class="icon"><i class="fas fa-plus"></i></div>
+      </label>
+      <div class="content">
+        <!-- Account Sub Heading One -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-k">
+          <label for="tab-k">
+            <span>How to create an account?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>On the home page, click on "Sign-up” on the top righ thand coner of the screen. A sign up page will be displayed on your screen. Fill in your name, your email address (optional) and create a password you can easily remember.
+            Please note that your login details will be saved to enable easy access on your next purchase with that same device.</p>
+          </div>
+        </div>
+        <!-- Account Sub Heading Two -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-l">
+          <label for="tab-l">
+            <span>How to login into my account?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>click on "login" on the top right hand coner of your screen, Enter your registered mobile number and your password then click on ‘login’. <br> your login details are usually saved on previously used devices.</p>
           </div>
         </div>
       </div>
-    </section>
-    
-    <%- include('../partials/footer.ejs') %>
+    </div>
 
-    
+
+    <!-- Meter Accordion [Heading four] -->
+    <div class="parent-tab tab-4">
+      <input type="radio" name="tab" id="tab-4">
+      <label for="tab-4" class="tab-4">
+        <span>Meter Frequently Asked Questions</span>
+        <div class="icon"><i class="fas fa-plus"></i></div>
+      </label>
+      <div class="content">
+        <!-- Meter Sub Heading One -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-m">
+          <label for="tab-m">
+            <span>I want to edit the name on my meter number.</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>The name and address displayed are the same ones registered on the distribution company’s system. Kindly visit the nearest electricity distribution company office to edit this information on your meter.</p>
+          </div>
+        </div>
+
+        <!-- Meter Sub Heading Two -->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-n">
+          <label for="tab-n">
+            <span>How long before my token expires?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>  Validity period for a token is 3 months. However, Meters with series 021, 01011 have to load the first token generated before loading another token. </p>
+          </div>
+        </div>
+
+        <!--  Meter Sub Heading three-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-o">
+          <label for="tab-o">
+            <span>Why did my meter reject the token?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <ul>
+              <li> The purchase was for the wrong meter number. Kindly confirm you are loading the token on the right meter. </li>
+              <li> The meter has not yet been activated- An activation code will be required from the distribution company. </li>
+              <li> There has been a change in your tariff index. </li>
+              <li>  Kindly contact our 24-hour support team on 09045596904 or send us an email at support@test.com</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Meter Sub Heading four-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-p">
+          <label for="tab-p">
+            <span>I can’t load my token</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <ul>
+              <li> Ensure there is power supply in your area; Confirm the phase you are on has power supply; Put off generators and inverters and change over to power supply; Key in the numbers you received as token and Click on the “Enter” button it could be green or red.</li>
+              <li> Link errors- Insert new batteries in the space provided at the back of the keypad to power on the device. If the device does not come on, press 3 to power up the battery. </li>
+              <li> |Step 1- Plug the keypads preferable to a wall socket used for your freezer or cooker (13Amps), and ensure the switch is on. </li>
+              <li> Step 2 -if you still have units on your meter, when there is power supply, plug the Keypad to a wall socket.</li>
+              <li>  Step 3- Key in 5258 instead of the first four-meter digits followed by the consecutive meter digits while omitting the last digit of the meter. I.e. 01011607946 then becomes 5258160794. Then press Send (blue or red button as the case maybe).</li>
+              <li>  Step 4- Load the token over again after the above has been done.</li>
+              <li>  Kindly contact our 24-hour support team on 08093394893 or send us an email at support@test.com for further assistance</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Meter Sub Heading five-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-q">
+          <label for="tab-q">
+            <span>Why did my meter reject the token?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <ul>
+              <li> The purchase was for the wrong meter number. Kindly confirm you are loading the token on the right meter. </li>
+              <li> The meter has not yet been activated- An activation code will be required from the distribution company. </li>
+              <li> There has been a change in your tariff index. </li>
+              <li>  Kindly contact our 24-hour support team on 09045596904 or send us an email at support@test.com</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Meter Sub Heading six-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-r">
+          <label for="tab-r">
+            <span>When I loaded the token, I got a response used but still don’t have power supply.</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <ul>
+              <li> A token can only be utilized by a specific meter number. Used simply means, the token has already been loaded on the meter. </li>
+              <li> Ensure there is power supply in your area; confirm the phase you are on has power supply. Put off generators and inverters and do a change over to confirm power supply. </li>
+              <li> This could also be as a result of technical Fault or loss of phase and Meter entering tamper mode.</li>
+              <li>  Kindly contact our 24-hour support team on 09045596904 or send us an email at support@test.com</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- Meter Sub Heading seven-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-s">
+          <label for="tab-s">
+            <span>Can I load the token I purchased on another prepaid meter?</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p> This is not possible because each token is generated and encrypted using the unique ID of the meter. This is to ensure that token generated can only be used by the specific meter.</p>
+          </div>
+        </div>
+
+        <!-- Meter Sub Heading eight-->
+        <div class="child-tab">
+          <input type="checkbox" name="sub-tab" id="tab-t">
+          <label for="tab-t">
+            <span>I was debited for a failed transaction</span>
+            <div class="icon"><i class="fas fa-plus"></i></div>
+          </label>
+          <div class="sub-content">
+            <p>Usually, you will receive a reversal from your bank within 24 hours. Kindly contact our 24-hour support team on 08094884949 or send us an email at support@test.com if you don’t.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+
+    <!-- <div class="parent-tab">
+      <input type="radio" name="tab" id="tab-1" checked>
+      <label for="tab-1">
+        <span>Accordion Heading One</span>
+        <div class="icon"><i class="fas fa-plus"></i></div>
+      </label>
+      <div class="content">
+         <ul>
+                <li> Kindly register your card for online transactions. There is a 90% chance your card would work.
+                    However, you could also pay with bank. On the payment page, click on ‘pay with bank’ select your bank name and fill in the required information. Some banks will require you to provide your account number. Check that the following information has been filled correctly: You entered all card information correctly?</li>
+                <li> You filled in the required card information (Card number, CVV- last three digits behind your card, Expiry date-      
+                      month and year)?
+                </li>
+                <li> Try with a different browser or device.</li>
+              </ul>
+      </div>
+    </div> -->
+
+    </div>
+  </div>
+  </div>
+  </section>
+</body>
+</html>
+
+
+
+<%- include('../partials/footer.ejs') %>

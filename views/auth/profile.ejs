@@ -52,6 +52,9 @@
                                 <label class="labels">PHONE NUMBER</label>
                                 <input type="text" class="form-control" name="phone" id="phone" placeholder="<%= user?.phone %>" value=""
                                 style="border: 2px solid #02a355">
+                                <% if(!user?.phone) { %>
+                                    <small>please enter phone number</small>
+                                <% } %>
                             </div>
                             <div class="mt-5 text-center">
                                 <button class="btn btn-outline-success w-100" type="submit">Save Profile</button>

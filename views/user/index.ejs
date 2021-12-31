@@ -22,7 +22,7 @@
         </p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <a
-            href="<% if (isAuthenticated) { %>/products<% } else { %>/login<% } %>"
+            href="<% if (isAuthenticated) { %>/utility/details<% } else { %>/login<% } %>"
             class="
               btn btn-success btn-outline-secondary
               text-white
@@ -30,7 +30,7 @@
               px-4
               gap-3
             "
-            >Get started &#8594;</a
+            > <% if (isAuthenticated) { %>Buy &#x26a1;<% } else { %>Get started<% } %> &#8594;</a
           >
         </div>
       </div>
