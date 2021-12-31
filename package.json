@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
@@ -31,11 +32,10 @@
     "moment": "^2.29.1",
     "mongodb": "^4.2.2",
     "mongoose": "^6.1.2",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-google-oauth2": "^0.2.0"
   },
-  "devDependencies": {
-    "morgan": "^1.10.0"
-  }
+  "devDependencies": {}
 }
