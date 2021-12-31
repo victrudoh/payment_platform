@@ -84,10 +84,10 @@ module.exports = {
     const currency = "NGN";
     const amount = parseInt(req.body.amount);
     const newAmount = amount + 100;
-    const tx_ref = tx_ref();
+    // const tx_ref = await tx_ref();
 
     const payload = {
-      tx_ref: tx_ref,
+      tx_ref: tx_ref(),
       amount: newAmount,
       currency: currency,
       payment_options: "card",
@@ -175,3 +175,5 @@ module.exports = {
     });
   },
 };
+
+
