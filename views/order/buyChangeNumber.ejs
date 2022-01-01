@@ -37,17 +37,6 @@
           />
         </div>
         <div class="my-3">
-          <% if (user.phone) { %>
-            <h5><small>Phone: </small><%= user.phone %></h5>
-            <input
-            type="hidden"
-            name="phone"
-            id="phone"
-            value="<%= user.phone %>"
-            style="border: 2px solid #02a355"
-            />
-            <a href="/utility/buyChangeNumber">Change number</a>
-          <% } else { %>
             <input
             type="text"
             name="phone"
@@ -55,7 +44,6 @@
             placeholder="Enter phone number"
             style="border: 2px solid #02a355"
             />
-          <% } %>
         </div>
         <div class="my-3">
           <input

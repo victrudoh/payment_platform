@@ -80,6 +80,49 @@ module.exports = {
     });
   },
 
+  buyChangeNumberController: async (req, res, next) => {
+    const billersCode = req.body.meter_no;
+    const serviceID = req.body.serviceID;
+    const type = req.body.type;
+
+    console.log("JUST CHECKING: ", req.body);
+
+    const payload = {
+      billersCode,
+      serviceID,
+      type,
+    };
+
+    const user = await User.findOne({ username: req.user.username });
+
+    const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
+
+    if (serviceID === "Select Service Provider") {
+      console.log("no service ID");
+      req.flash("error", "Please Select Service Provider");
+      return res.redirect("/utility/details");
+    } else if (type === "Meter Type") {
+      console.log("no metere type");
+      req.flash("error", "Please Select meter type");
+      return res.redirect("/utility/details");
+    } else if (verifyMeterNumber.error) {
+      console.log(verifyMeterNumber.error);
+      req.flash("error", "Invalid Meter Number. Please check and Try Again");
+      return res.redirect("/utility/details");
+    }
+
+    res.render("order/buyChangeNumber", {
+      pageTitle: "order",
+      path: "order",
+      role: req.user?.role,
+      details: verifyMeterNumber,
+      user,
+      serviceID,
+      billersCode,
+      type,
+    });
+  },
+
   postPayController: async (req, res, next) => {
     const currency = "NGN";
     const amount = parseInt(req.body.amount);
@@ -144,8 +187,12 @@ module.exports = {
     const verify = await FLW_services.verifyTransaction(id);
 
     const transaction = await T_Model.findOne({ tx_ref: tx_ref });
-    transaction.status = status;
-    await transaction.save();
+    console.log(
+      " ~ file: utility.controller.js ~ line 148 ~ getVerifyController: ~ transaction",
+      transaction
+    );
+    // transaction.status = status;
+    // await transaction.save();
 
     // console.log("transaction", transaction);
 
