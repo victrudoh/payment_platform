@@ -26,6 +26,8 @@ module.exports = {
       message = null;
     }
 
+    console.log("Tx_ref in Get details controller: ", tx_ref.get_Tx_Ref());
+
     const distributors = await VTP_services.getServiceID();
 
     res.render("order/meterDetails", {
@@ -128,9 +130,10 @@ module.exports = {
     const amount = parseInt(req.body.amount);
     const newAmount = amount + 100;
     // const tx_ref = await tx_ref();
+    const transREf = await tx_ref.get_Tx_Ref();
 
     const payload = {
-      tx_ref: tx_ref(),
+      tx_ref: transREf,
       amount: newAmount,
       currency: currency,
       payment_options: "card",
@@ -156,7 +159,7 @@ module.exports = {
     const phone = req.body.phone;
 
     const transaction = await new T_Model({
-      tx_ref: tx_ref,
+      tx_ref: transREf,
       user: req.body.user_id,
       email: req.body.email,
       fullname: req.body.name,
