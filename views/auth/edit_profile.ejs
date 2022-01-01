@@ -1,0 +1,71 @@
+<%- include('../partials/header.ejs') %>
+
+<main>
+    <div class="container rounded bg-white ">
+        <div class="row">  
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <% let image = user?.gender === 'male' ? "/images/img_avatar1.png" : user?.gender === 'female' ? "/images/img_avatar2.png" : "/images/fruit_avatar.png" %>
+                    <% user?.picture ? image = user.picture : image = image %> 
+                    <img class="rounded-circle mt-5" alt="Avatar" 
+                        width="150px" src="<%= image %>">
+                        <h5 style="color: #005c2f">Hello, <%= user?.username %> <br>
+                        <small><%= user?.email %> </small>
+                        </h5> 
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h1 style="color: #005c2f">Edit Profile</h1>
+                </div>
+                    <div class="row mt-3">
+                        <% if (errorMessage) { %>
+                            <div class="user_message user_message_error"><%= errorMessage %></div>
+                        <% } %>
+                        <form action="/edit_profile" method="post">
+                            <input type="hidden" name="user_id" id="user_id" value="<%= user?._id %>">
+                            <div class="col-md-12">
+                                <label class="labels">USERNAME</label>
+                                <input type="text" class="form-control" name="username" id="username" value="<%= user?.username %>" style="border: 2px solid #02a355">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels"> EMAIL</label>
+                                <input type="text" class="form-control" name="email" id="email" value="<%= user?.email %>"
+                                style="border: 2px solid #02a355">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="hidden" class="form-control" name="password" id="password" value="<%= user?.password %>" 
+                                style="border: 2px solid #02a355">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">GENDER</label>
+                                <select name="gender" id="gender" class="w-100 mb-2" style="height: 45px; border-radius: 5px; border: 2px solid #02a355">
+                                    <option><%= user?.gender %></option>
+                                    <option value="male">male</option>
+                                    <option value="female">female</option>
+                                    <option value="other">other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="labels">PHONE NUMBER</label>
+                                <input type="text" class="form-control" name="phone" id="phone" value="<%= user?.phone %>"
+                                style="border: 2px solid #02a355">
+                                <% if(!user?.phone) { %>
+                                    <small>please enter phone number</small>
+                                <% } %>
+                            </div>
+                            <div class="mt-5 text-center">
+                                <button class="btn btn-outline-success w-100" type="submit">Update Profile</button>
+                                <a href="/profile" class="btn btn-outline-success w-100">Back</a>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</main>
+<%- include('../partials/footer.ejs') %>

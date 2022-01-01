@@ -32,10 +32,13 @@ router.get("/googleLogin", authController.getGoogleLoginController);
 
 router.get("/profile", authController.getProfileController);
 
-router.post("/profile_update", authController.postUpdateProfileController);
+router.get("/edit_profile", authController.getEditProfileController);
+
+router.post("/edit_profile", authController.postEditProfileController);
+
+// router.post("/edit_profile", authController.postEditProfileController);
 
 // router.post("/profile", authController.getEditProfileController);
 
-// router.post("/edit_profile", authController.postEditProfileController);
 
 module.exports = router;

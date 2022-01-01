@@ -113,18 +113,36 @@ module.exports = {
     res.render("auth/profile", {
       pageTitle: "profile",
       path: "profile",
-      role: req.user?req.user.role:"",
+      role: req.user ? req.user.role : "",
       user: user,
       errorMessage: message,
     });
   },
 
-  postUpdateProfileController: async (req, res, next) => {
+  getEditProfileController: async (req, res) => {
+    let message = req.flash("error");
+    //so the error message box will not always be active
+    if (message.length > 0) {
+      message = message[0];
+    } else {
+      message = null;
+    }
+
+    const user = await User.findOne({ username: req.user.username });
+
+    res.render("auth/edit_profile", {
+      pageTitle: "profile",
+      path: "profile",
+      role: req.user?.role,
+      errorMessage: message,
+      user: user,
+    });
+  },
+
+  postEditProfileController: async (req, res, next) => {
     const user_id = req.body.user_id;
     const username = req.body.username;
-    console.log("username", username);
     const email = req.body.email;
-    // const password = req.body.password;
     const gender = req.body.gender;
     const phone = req.body.phone;
 
@@ -150,17 +168,6 @@ module.exports = {
 
     return res.redirect("/profile");
   },
-
-  // getEditProfileController: async (req, res) => {
-  //   const user = await User.findOne({ username: req.user.username });
-
-  //   res.render("auth/edit_profile", {
-  //     pageTitle: "profile",
-  //     path: "profile",
-  //     role: req.user?.role,
-  //     user: user,
-  //   });
-  // },
 
   // postEditProfileController: async (req, res) => {
   //   const userId = req.body.id;

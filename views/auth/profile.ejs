@@ -24,40 +24,29 @@
                         <% if (errorMessage) { %>
                             <div class="user_message user_message_error"><%= errorMessage %></div>
                         <% } %>
-                        <form action="/profile_update" method="post">
                             <input type="hidden" name="user_id" id="user_id" value="<%= user?._id %>">
                             <div class="col-md-12">
-                                <label class="labels">USERNAME</label>
-                                <input type="text" class="form-control" name="username" id="username" placeholder="<%= user?.username %>" value="" style="border: 2px solid #02a355">
+                                <label class="labels bg-success w-100 text-white text-center p-2">USERNAME</label>
+                                <h5 class="text-center"><%= user?.username %></h5>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels"> EMAIL</label>
-                                <input type="text" class="form-control" name="email" id="email" placeholder="<%= user?.email %>" value="" 
-                                style="border: 2px solid #02a355">
+                                <label class="labels bg-success w-100 text-white text-center p-2"> EMAIL</label>
+                                <h5 class="text-center"><%= user?.email %></h5>
                             </div>
                             <div class="col-md-12">
-                                <input type="hidden" class="form-control" name="password" id="password" value="<%= user?.password %>" 
-                                style="border: 2px solid #02a355">
+                                <label class="labels bg-success w-100 text-white text-center p-2">GENDER</label>
+                                <h5 class="text-center"><%= user?.gender %></h5>
                             </div>
                             <div class="col-md-12">
-                                <label class="labels">GENDER</label>
-                                <select name="gender" id="gender" class="w-100 mb-2" style="height: 45px; border-radius: 5px; border: 2px solid #02a355">
-                                    <option><%= user?.gender %></option>
-                                    <option value="male">male</option>
-                                    <option value="female">female</option>
-                                    <option value="other">other</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="labels">PHONE NUMBER</label>
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="<%= user?.phone %>" value=""
-                                style="border: 2px solid #02a355">
+                                <label class="labels bg-success w-100 text-white text-center p-2">PHONE NUMBER</label>
+                                <h5 class="text-center"><%= user?.phone %></h5>
                                 <% if(!user?.phone) { %>
                                     <small>please enter phone number</small>
                                 <% } %>
                             </div>
                             <div class="mt-5 text-center">
-                                <button class="btn btn-outline-success w-100" type="submit">Save Profile</button>
+                                <a href="/edit_profile" class="btn btn-outline-success w-100">Edit Profile</a>
+                                <a href="/profile" class="btn btn-outline-success w-100">Back</a>
                             </div>
                     </form>
                 </div>
