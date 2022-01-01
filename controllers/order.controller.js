@@ -9,7 +9,7 @@ module.exports = {
   getHistoryController: async (req, res, next) => {
 
     console.log("USer: ", req.user);
-    const user = req.user._id;
+    const user = req.user?._id;
 
     const orders = await T_Model.find({ user });
 
