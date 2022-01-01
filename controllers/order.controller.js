@@ -8,7 +8,10 @@ module.exports = {
 
   getHistoryController: async (req, res, next) => {
 
-    const orders = await T_Model.find();
+    console.log("USer: ", req.user);
+    const user = req.user._id;
+
+    const orders = await T_Model.find({ user });
 
     res.render("order/history", {
       pageTitle: "Transactions history",
