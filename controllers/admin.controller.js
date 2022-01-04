@@ -17,7 +17,7 @@ module.exports = {
   },
 
   getCompletedTranscationsController: async (req, res, next) => {
-    
+
     const orders = await Order.find({ status: "delivered" });
     console.log("getOrdersController: ~ Orders:", orders);
 
@@ -67,8 +67,11 @@ module.exports = {
     const order = await Order.find();
     const orders = order.length;
 
-    // const prod = await Product.find();
-    // const prods = prod.length;
+    const pending1 = await Order.find({ status: "initiated" });
+    const pending = pending1.length;
+    
+    const delivered1 = await Order.find({ status: "delivered" });
+    const delivered = delivered1.length;
 
     // const outProd = await Product.find({ isDisabled: true });
     // const outProds = outProd.length;
@@ -79,9 +82,9 @@ module.exports = {
       role: req.user.role,
       admin: admin,
       users: users,
-      orders: orders,
-      // prods: prods,
-      // outProds: outProds,
+      orders,
+      pending,
+      delivered,
     });
   },
 
