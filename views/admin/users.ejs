@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+
+<main>
+  
+<div>
+    <h1 style="margin-left: 35px;" class="fw-bold my-2" >Users</h1>
+
+    <% num = 1 %>
+
+    <table class="table table-striped table-hover mx-2">
+      <!-- <caption>List of users</caption> -->
+      <tr>
+        <th>S/N</th>
+        <th>User Id</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Physical Address</th>
+        <th>Actions</th>
+      </tr>
+
+      <% users.forEach(user => { %>
+      <!-- <form action="/admin/edit_user/<%= user._id %>" method="post"> -->
+      <tr>
+        <td><%= num++ %></td>
+        <td><%= user._id %></td>
+        <input type="hidden" value="<%= user._id %>" name="userId">
+        <td><%= user.username %></td>
+        <td><%= user.email %></td>
+        <td><%= user.physicalAddress %></td>
+        <td><a href="/admin/edit_user/<%= user._id %>" class="btn btn-outline-secondary my-1">Edit</a></td>
+        <!-- <td><button type="submit" class="btn" >Edit</button></td> -->
+      </tr>
+      <%  }) %>
+      <!-- </form> -->
+
+    </table>
+    <a href="/admin/dashboard" class="btn btn-outline-secondary" style="margin-left: 35px;">Back</a>
+</div>
+
+
+</main>
+
+<%- include('../partials/footer.ejs') %>

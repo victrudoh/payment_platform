@@ -69,6 +69,7 @@ const errorController = require("./controllers/error.controller");
 const User = require("./models/user.model");
 
 const authRouter = require("./routes/auth.routes");
+const adminRouter = require("./routes/admin.routes");
 const userRouter = require("./routes/user.routes");
 const utilityRouter = require("./routes/utility.routes");
 const orderRouter = require("./routes/order.routes");
@@ -91,6 +92,7 @@ app.use("/", userRouter);
 app.use("/", orderRouter);
 app.use("/utility", utilityRouter);
 app.use("/payment", flutterwaveRouter);
+app.use("/admin", adminRouter);
 
 app.use(errorController.get404);
 

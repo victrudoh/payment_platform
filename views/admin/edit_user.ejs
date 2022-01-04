@@ -1,0 +1,43 @@
+<%- include('../partials/header.ejs') %>
+
+<main style="height: 78vh; margin-top: 24px; margin-bottom: 105px;">
+  
+<div id="register">
+  <div class="card">
+
+    <h1>Edit User</h1>
+    <form action="/admin/update_user" method="POST">
+      <input type="hidden" name="userId" value="<%= user._id %>">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" value="<%= user.username %>" />
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" value="<%= user.email %>" />
+      </div>
+      <div>
+        <input type="hidden" name="password" id="password" value="<%= user.password %>" />
+      </div>
+      <div>
+        <label for="physicalAddress">Physical address:</label>
+        <input type="text" name="physicalAddress" id="physicalAddress" value="<%= user.physicalAddress %>" />
+      </div>
+      <div>
+        <label for="role">Role:</label>
+        <select name="role" id="role" class="form-control">
+          <option value="user">user</option>
+          <option value="cashier">cashier</option>
+          <option value="admin">admin</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-outline-warning">Update</button>
+      <a href="/admin/users" class="btn btn-outline-secondary" >Back</a>
+    </form>
+  </div>
+
+
+
+</main>
+
+<%- include('../partials/footer.ejs') %>

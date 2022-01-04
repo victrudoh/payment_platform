@@ -194,6 +194,7 @@ module.exports = {
   // },
 
   getGoogleLoginController: async (req, res) => {
+
     const username = req.user.displayName;
     const email = req.user.email;
     const password = req.user.email;
