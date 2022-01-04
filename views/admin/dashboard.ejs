@@ -6,25 +6,6 @@
         <h1 class="dashboard_AdminName my-5">Hello, <%= admin.username %><img src="<%= image %>" alt="Avatar" class="dashboard_avatar float-end mx-3"></h1>
     </div>
 
-    <!-- <div class="dashboard_container d-flex justify-content-evenly">
-        <a href="/admin/users" class="dashboard_card my-5 py-3 ">
-            <h2>Users</h2>
-            <h3><%= users %></h3>
-        </a>
-        <a href="/admin/orders" class="dashboard_card my-5 py-3">
-            <h2>Orders</h2>
-            <h3>67</h3>
-        </a>
-        <a href="/admin/products" class="dashboard_card my-5 py-3">
-            <h2>Products</h2>
-            <h3>54</h3>
-        </a>
-        <a href="/admin/out_of_stock?disable=true" class="dashboard_card my-5 py-3">
-            <h2>Out of stock</h2>
-            <h3>23</h3>
-        </a>
-    </div> -->
-
     <div class="container-fluid">
         <div class="row mt-3 mb-3 d-flex justify-content-evenly">
             <div class="col col-md-2 dashboard_card my-2 mx-2">
@@ -34,20 +15,20 @@
                 </a>
             </div>
             <div class="col col-md-2 dashboard_card my-2 mx-2">
-                <a href="/admin/orders">
-                    <h2>Orders</h2>
-                    <h3>67</h3>
+                <a href="/admin/pendingTransactions">
+                    <h2>Pending Transactions</h2>
+                    <h3><%= orders %></h3>
                 </a>
             </div>
             <div class="col col-md-2 dashboard_card my-2 mx-2">
-                <a href="/admin/products">
-                    <h2>Products</h2>
+                <a href="/admin/completedTranscations">
+                    <h2>Completed Transactions</h2>
                     <h3>54</h3>
                 </a>
             </div>
             <div class="col col-md-2 dashboard_card my-2 mx-2">
                 <a href="/admin/out_of_stock?disable=true">
-                    <h2>Out of stock</h2>
+                    <h2>Complains</h2>
                     <h3>23</h3>
                 </a>
             </div>

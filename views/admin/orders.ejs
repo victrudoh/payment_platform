@@ -3,13 +3,10 @@
 <main>
 
   <div class="">
-    <form action="/admin/orders" method="POST">
-        <label for="date" class="mt-2">Sort by date:</label>
-        <input type="date" name="date" id="date">
-        <button type="submit" class="btn btn-outline-secondary my-1">Sort</button>
-      <div class="spaceBetween">
-        <a href="/admin/ordersPayment" class="btn btn-outline-secondary">Sort by Payment type</a>
-      </div>
+    <form action="/admin/findTransaction" method="POST">
+        <label for="searchTransaction" class="mt-2">Search Transactions</label>
+        <input type="text" name="searchTransaction" id="searchTransaction">
+        <button type="submit" class="btn btn-outline-secondary my-1">Search</button>
     </form>
   </div>
   <br />
@@ -21,42 +18,32 @@
     <% totalIncome = 0 %>
     <% orders.forEach(order => { %>
     <li class="orders__item">
-      <div class="spaceBetween">
-        <h1>Order - # <%= order._id %></h1>
-        <%= order.createdAt %>
-      </div>
-      <ul class="orders__products">
-        <% order.products.forEach(p => { %>
-        <li class="orders__products-item">
-          <%= p.product.title %> (<%= p.quantity %>)
-          <h3>₦<%= p.product.price %></h3>
-          <% itemTotalPrice = p.product.price * p.quantity %> <% totalPrice =
-          totalPrice + itemTotalPrice %>
-        </li>
-        <% }); %>
+        <h3>Token - # <%= order.token %></h3> <hr>
         <div class="spaceBetween">
-          Payment type: <%= order.paymentOption %>
-          <div>Ordered by: <%= order.user.name %></div>
-          <div><% if (!order.paid) { %>
-            <h4 style="color: red;">Payment Status: Pending</h4>
-            <% } else { %>
-            <h3 style="color: green;">Payment Confirmed by <%= order.cashier.username %></h3>
-            <% } %></div>
+          <div><h6> Transaction Date:</h6></div>
+          <h6><%= order.createdAt %></h6>
         </div>
         <div class="spaceBetween">
-          <h3>Total Price: ₦<%= totalPrice %></h3>
-          <% totalIncome = totalIncome + totalPrice %>
-          <!-- <a href="/invoice/<%= order._id %>" class="btn btn-outline-secondary">Generate invoice</a> -->
+          <div><h6> User:</h6></div>
+          <h6><%= order.email %></h6>
         </div>
-        <% totalPrice = 0 %>
-      </ul>
+        <div class="spaceBetween">
+          <div><h6>Transaction Type:</h6></div>
+          <h6><%= order.meterType %></h6>
+        </div>
+        <div class="spaceBetween">
+          <div><h6>Transaction Status:</h6></div>
+          <h6><%= order.status %></h6>
+        </div>
+        <div class="spaceBetween">
+          <div><h6>Total Amount</h6></div>
+          <h6><%= order.amount %></h6>
+        </div>
+          <!-- <a href="/receipt/<%= order._id %>" class="btn btn-outline-secondary">Generate receipt</a> -->
     </li>
     <% }); %>
   </ul>
   <% } %>
-
-  <h2 style="text-align: center; color: white;" class="fixed-bottom bg-secondary text-center">Total Income: ₦<%= totalIncome %></h2>
-  <% totalIncome = 0 %>
 
 </main>
 

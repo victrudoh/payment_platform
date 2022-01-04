@@ -38,7 +38,7 @@
   color: white;
 }
 
-.dashboard_card h2 {
+.dashboard_card a h2 {
   font-size: 23px;
   left: 0;
   margin-right: 50%;
