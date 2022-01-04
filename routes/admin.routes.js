@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
 const adminController = require("../controllers/admin.controller");
-const isAuthenticated = require("../Middlewares/isAuthenticated");
-const {authorize} = require("../Middlewares/roleCheck");
+const isAuthenticated = require("../middlewares/isAuthenticated");
+const {authorize} = require("../middlewares/roleCheck");
 // const upload = require("../Middlewares/multer");
 // const uploadExcel = require("../Middlewares/uploadExcel");
 
