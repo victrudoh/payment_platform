@@ -29,17 +29,12 @@
   background-color: #212529;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  color: white !important;
   font-size: large;
-  /* margin: 5px 5px; */
-  /* margin: 3%; */
-  /* padding: 2% 3%; */
-  /* padding: 4px 9px; */
-  /* width: 50%; */
-  /* width: 50px; */
 }
 
 .dashboard_card:hover {
-  background-color: #ffc107;
+  background-color: #198754;
   color: white;
 }
 

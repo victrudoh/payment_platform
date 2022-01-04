@@ -35408,14 +35408,14 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-image:not(.u-shading) > .u-container-layout > a,
         a
         {
-        color: #ff9d00;
+        color: white;
         }
         .u-overlap.u-overlap-transparent:not(.u-overlap-contrast) .u-header :not(.u-nav-item) > a:hover,
         .u-gradient > .u-container-layout > a:hover,
         .u-image:not(.u-shading) > .u-container-layout > a:hover,
         a:hover
         {
-        color: #e68d00;
+        color: white;
         }
         .u-overlap.u-overlap-transparent:not(.u-overlap-contrast) .u-header :not(.u-nav-item) > .u-btn,
         .u-gradient > .u-container-layout > .u-btn,
