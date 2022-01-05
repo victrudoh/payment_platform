@@ -14,7 +14,7 @@
         <!-- <th>User Id</th> -->
         <th>Username</th>
         <th>Email</th>
-        <th>Physical Address</th>
+        <!-- <th>Physical Address</th> -->
         <th>Actions</th>
       </tr>
 
@@ -26,8 +26,11 @@
         <input type="hidden" value="<%= user._id %>" name="userId">
         <td><%= user.username %></td>
         <td><%= user.email %></td>
-        <td><%= user.physicalAddress %></td>
-        <td><a href="/admin/edit_user/<%= user._id %>" class="btn btn-outline-secondary my-1">Edit</a></td>
+        <!-- <td><%= user.physicalAddress %></td> -->
+        <td>
+          <a href="/admin/view_transactions/<%= user._id %>" class="btn btn-outline-secondary my-1">View transactions</a>
+          <a href="/admin/edit_user/<%= user._id %>" class="btn btn-outline-secondary my-1">Edit</a>
+        </td>
         <!-- <td><button type="submit" class="btn" >Edit</button></td> -->
       </tr>
       <%  }) %>

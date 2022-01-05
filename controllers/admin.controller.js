@@ -1,6 +1,7 @@
 // const Product = require("../models/product.model");
 const Order = require("../models/transaction.model");
 const User = require("../models/user.model");
+const Complaint = require("../models/complaint.model");
 const escapeStringRegexp = require("escape-string-regexp");
 
 module.exports = {
@@ -17,7 +18,6 @@ module.exports = {
   },
 
   getCompletedTranscationsController: async (req, res, next) => {
-
     const orders = await Order.find({ status: "delivered" });
     console.log("getOrdersController: ~ Orders:", orders);
 
@@ -69,9 +69,12 @@ module.exports = {
 
     const pending1 = await Order.find({ status: "initiated" });
     const pending = pending1.length;
-    
+
     const delivered1 = await Order.find({ status: "delivered" });
     const delivered = delivered1.length;
+
+    const complaint1 = await Complaint.find({ status: "unattended" });
+    const complaint = complaint1.length;
 
     // const outProd = await Product.find({ isDisabled: true });
     // const outProds = outProd.length;
@@ -85,6 +88,7 @@ module.exports = {
       orders,
       pending,
       delivered,
+      complaint,
     });
   },
 
@@ -130,6 +134,22 @@ module.exports = {
 
     await user.save();
     res.redirect("/admin/users");
+  },
+
+  getUserTransactionsController: async (req, res, next) => {
+    
+    const userId = req.params.id;
+    const user = await User.findOne({ _id: userId });
+
+    const orders = await Order.find({ user: userId });
+    console.log("getOrdersController: ~ Orders:", orders);
+
+    res.render("admin/orders", {
+      path: "dashboard",
+      pageTitle: "All Orders",
+      orders: orders,
+      role: req.user?.role,
+    });
   },
 
   getDisabledProductsController: async (req, res, next) => {

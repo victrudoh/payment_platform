@@ -26,6 +26,8 @@ router.get("/edit_user/:id", authorize("admin"), adminController.postEditUserCon
 
 router.post("/update_user", authorize("admin"), adminController.postUpdateUserController);
 
+router.get("/view_transactions/:id", authorize("admin"), adminController.getUserTransactionsController);
+
 router.get("/out_of_stock", authorize("admin"), adminController.getDisabledProductsController);
 
 module.exports = router;

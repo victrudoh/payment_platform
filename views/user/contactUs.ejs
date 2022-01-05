@@ -1,0 +1,78 @@
+<%- include('../partials/header.ejs') %>
+
+<main>
+  <nav id="login">
+    <div class="card">
+      <% if (errorMessage) { %>
+      <div class="user_message user_message_error"><%= errorMessage %></div>
+      <% } %>
+      <h1 class="my-2" style="color: #005c2f">Contact us</h1>
+      <hr />
+
+      Got any issues? <br> We're here to help Please fill the form below
+
+      <form action="/contactUs" method="POST">
+
+        <input type="hidden" name="user_id" id="user_id" value="<%= user._id %>">
+        
+        <input type="hidden" name="username" id="username" value="<%= user.username %>">
+
+        <input type="hidden" name="picture" id="picture" value="<%= user.picture %>">
+
+        <div class="my-3">
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            style="border: 2px solid #22be76"
+          />
+        </div>
+        <div class="my-3">
+          <select
+            name="complaint"
+            id="complaint"
+            class="w-100 mb-2"
+            style="height: 45px; border-radius: 5px; border: 2px solid #02a355"
+          >
+            <option value="null">Please select a complaint</option>
+            <option value="no_Token">I was debited without a token</option>
+            <option value="card_Issue">I cannot make payment with my ATM card</option>
+            <option value="dumb_Fuck">I don't know how to use a feature</option>
+          </select>
+        </div>
+        <div class="my-3">
+          <input
+            type="text"
+            name="Othercomplaint"
+            id="Othercomplaint"
+            placeholder="Other Reason (Optional)"
+            style="border: 2px solid #02a355"
+          />
+        </div>
+        <div class="my-3">
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Description"
+            rows="3" 
+            cols="36"
+            style="border: 2px solid #02a355"
+          ></textarea>
+        </div>
+
+        <br>
+        1) Ensure the email you are providing is active and valid. <br>
+        2) Please wait for a period of 24 hours before sending another as sending multiple messages will reduce the response time as we try to resolve. <br>
+        3) Kindly check your inbox and/or spam for our response. <br>
+
+        <button type="submit" class="btn btn-outline-success w-100">
+          I understand, Proceed
+        </button>
+        <a href="/" class="btn btn-outline-secondary w-100">Back</a>
+      </form>
+    </div>
+  </nav>
+</main>
+
+<%- include('../partials/footer.ejs') %>
