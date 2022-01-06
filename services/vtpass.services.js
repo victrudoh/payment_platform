@@ -50,10 +50,21 @@ const makePayment = async (payload) => {
   }  
 }
 
+const queryTransactionStatus = async (payload) => {
+  try {
+    const response = await axios.post(`${VTP_baseURL}/requery`, payload, options);
+    console.log("queryTransactionStatus: ", response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }  
+}
+
 
 
 module.exports = {
   getServiceID,
   verifyMeterNumber,
   makePayment,
+  queryTransactionStatus,
 };

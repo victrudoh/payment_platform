@@ -28,6 +28,8 @@ router.post("/update_user", authorize("admin"), adminController.postUpdateUserCo
 
 router.get("/view_transactions/:id", authorize("admin"), adminController.getUserTransactionsController);
 
+router.post("/verify_transaction", authorize("admin"), adminController.postVerifyUserTransaction);
+
 router.get("/out_of_stock", authorize("admin"), adminController.getDisabledProductsController);
 
 module.exports = router;

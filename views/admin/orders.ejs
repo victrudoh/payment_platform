@@ -18,7 +18,15 @@
     <% totalIncome = 0 %>
     <% orders.forEach(order => { %>
     <li class="orders__item">
-        <h3>Token - # <%= order.token %></h3> <hr>
+        <div class="spaceBetween">
+          <h3>Token - # <%= order.token %></h3> 
+          <!-- <a href="/admin/verify_transaction/<%= order.tx_ref %>" class="btn btn-outline-success my-1">Verify transaction</a> -->
+          <form action="/admin/verify_transaction" method="post">
+            <input type="hidden" name="request_id" id="request_id" value="<%= order.tx_ref %>">
+            <button type="submit" class="btn btn-outline-success my-1">Verify transaction</button>
+          </form>
+        </div>
+        <hr>
         <div class="spaceBetween">
           <div><h6> Transaction Date:</h6></div>
           <h6><%= order.createdAt %></h6>

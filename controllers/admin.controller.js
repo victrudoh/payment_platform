@@ -2,10 +2,14 @@
 const Order = require("../models/transaction.model");
 const User = require("../models/user.model");
 const Complaint = require("../models/complaint.model");
+
+const VTP_services = require("../services/vtpass.services");
+
 const escapeStringRegexp = require("escape-string-regexp");
 
 module.exports = {
   getPendingTransactionsController: async (req, res, next) => {
+
     const orders = await Order.find({ status: "initiated" });
     console.log("getOrdersController: ~ Orders:", orders);
 
@@ -137,12 +141,11 @@ module.exports = {
   },
 
   getUserTransactionsController: async (req, res, next) => {
-    
     const userId = req.params.id;
     const user = await User.findOne({ _id: userId });
 
     const orders = await Order.find({ user: userId });
-    console.log("getOrdersController: ~ Orders:", orders);
+    // console.log("getOrdersController: ~ Orders:", orders);
 
     res.render("admin/orders", {
       path: "dashboard",
@@ -150,6 +153,22 @@ module.exports = {
       orders: orders,
       role: req.user?.role,
     });
+  },
+
+  postVerifyUserTransaction: async (req, res, next) => {
+    const request_id = req.body.request_id;
+    console.log("postVerifyUserTransaction: ~ request_id", request_id);
+
+    
+
+    const payload = {
+      request_id,
+    };
+
+    const verifyMeterNumber = await VTP_services.queryTransactionStatus(
+      payload
+    );    
+
   },
 
   getDisabledProductsController: async (req, res, next) => {
