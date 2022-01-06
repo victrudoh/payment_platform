@@ -1,6 +1,6 @@
 <%- include('../partials/header.ejs') %>
 
-<main style="height: 78vh; margin-top: 24px; margin-bottom: 105px;">
+<main >
   
 <div id="register">
   <div class="card">
@@ -20,14 +20,10 @@
         <input type="hidden" name="password" id="password" value="<%= user.password %>" />
       </div>
       <div>
-        <label for="physicalAddress">Physical address:</label>
-        <input type="text" name="physicalAddress" id="physicalAddress" value="<%= user.physicalAddress %>" />
-      </div>
       <div>
         <label for="role">Role:</label>
         <select name="role" id="role" class="form-control">
           <option value="user">user</option>
-          <option value="cashier">cashier</option>
           <option value="admin">admin</option>
         </select>
       </div>
