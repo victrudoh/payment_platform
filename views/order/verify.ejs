@@ -1,18 +1,24 @@
 <%- include('../partials/header.ejs') %>
 
 <main>
-    <h1>verification page</h1> <hr>
+  <div class="text-center">
+    <h1>verification page</h1>
+    <hr />
     <h3><%= makePayment.response_description %></h3>
     <h5>Name: <%= makePayment.customerName %></h5>
     <% if (makePayment.customerAddress == null) { %>
-        <div></div>
+    <div></div>
     <% } else { %>
-        <h5>Address: <%= makePayment.customerAddress %></h5>
+    <h5>Address: <%= makePayment.customerAddress %></h5>
     <% } %>
     <h5>Distributor: <%= makePayment.content.transactions.product_name %></h5>
     <h5>Amount: <%= makePayment.amount %></h5>
     <h5>Units: <%= makePayment.PurchasedUnits %></h5>
-    <strong>Token: <h5><%= makePayment.Token %></h5></strong>
+    <strong
+      >Token:
+      <h5><%= makePayment.Token %></h5></strong
+    >
+  </div>
 </main>
 
 <%- include('../partials/footer.ejs') %>

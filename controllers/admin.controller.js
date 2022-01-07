@@ -173,6 +173,8 @@ module.exports = {
     const request_id = req.body.request_id;
     console.log("postVerifyUserTransaction: ~ request_id", request_id);
 
+    
+
     const payload = {
       request_id,
     };
@@ -180,6 +182,8 @@ module.exports = {
     const verifyMeterNumber = await VTP_services.queryTransactionStatus(
       payload
     );
+
+    const updateOrder = await Order.findById(reque);
   },
 
   getComplaintsController: async (req, res, next) => {

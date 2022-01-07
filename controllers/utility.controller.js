@@ -148,7 +148,7 @@ module.exports = {
         customer_id: req.body.user_id,
       },
       customizations: {
-        title: "Utility Payments",
+        title: "Top App",
         description: "Pay with card",
         logo: "#",
       },
