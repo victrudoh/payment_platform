@@ -171,9 +171,8 @@ module.exports = {
 
   postVerifyUserTransaction: async (req, res, next) => {
     const request_id = req.body.request_id;
-    console.log("postVerifyUserTransaction: ~ request_id", request_id);
-
-    
+    const user_id = req.body.user_id;
+    // console.log("postVerifyUserTransaction: ~ request_id", request_id);
 
     const payload = {
       request_id,
@@ -182,8 +181,29 @@ module.exports = {
     const verifyMeterNumber = await VTP_services.queryTransactionStatus(
       payload
     );
+    console.log("verifyMeterNumber", verifyMeterNumber);
 
-    const updateOrder = await Order.findById(reque);
+    const updatedOrder = await Order.findOne({ tx_ref: request_id });
+    console.log("~ postVerifyUserTransaction: ~ updatedOrder", updatedOrder)
+
+    updatedOrder.email = updatedOrder.email;
+    updatedOrder.fullname = updatedOrder.fullname;
+    updatedOrder.phone = updatedOrder.phone;
+    updatedOrder.tx_ref = updatedOrder.tx_ref;
+    updatedOrder.amount = updatedOrder.amount;
+    updatedOrder.currency = updatedOrder.currency;
+    updatedOrder.billersCode = updatedOrder.billersCode;
+    updatedOrder.serviceID = updatedOrder.serviceID;
+    updatedOrder.meterType = updatedOrder.meterType;
+    updatedOrder.status = updatedOrder.status;
+    updatedOrder.token = verifyMeterNumber.purchased_code;
+
+    await updatedOrder.save();
+    console.log("Verified transaction and saved...");
+
+    return res.redirect("/admin/completedTranscations");
+
+
   },
 
   getComplaintsController: async (req, res, next) => {
