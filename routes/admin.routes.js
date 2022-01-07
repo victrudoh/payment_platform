@@ -28,7 +28,11 @@ router.post("/update_user", authorize("admin"), adminController.postUpdateUserCo
 
 router.get("/view_transactions/:id", authorize("admin"), adminController.getUserTransactionsController);
 
+router.get("/view_pending_transactions/:id", authorize("admin"), adminController.getUserPendingTransactionsController);
+
 router.post("/verify_transaction", authorize("admin"), adminController.postVerifyUserTransaction);
+
+router.get("/complaints", authorize("admin"), adminController.getComplaintsController);
 
 router.get("/out_of_stock", authorize("admin"), adminController.getDisabledProductsController);
 

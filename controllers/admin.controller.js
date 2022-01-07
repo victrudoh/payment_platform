@@ -9,7 +9,6 @@ const escapeStringRegexp = require("escape-string-regexp");
 
 module.exports = {
   getPendingTransactionsController: async (req, res, next) => {
-
     const orders = await Order.find({ status: "initiated" });
     console.log("getOrdersController: ~ Orders:", orders);
 
@@ -155,11 +154,24 @@ module.exports = {
     });
   },
 
+  getUserPendingTransactionsController: async (req, res, next) => {
+    const userId = req.params.id;
+    const user = await User.findOne({ _id: userId });
+
+    const orders = await Order.find({ user: userId, status: "initiated" });
+    // console.log("getOrdersController: ~ Orders:", orders);
+
+    res.render("admin/orders", {
+      path: "dashboard",
+      pageTitle: "All Orders",
+      orders: orders,
+      role: req.user?.role,
+    });
+  },
+
   postVerifyUserTransaction: async (req, res, next) => {
     const request_id = req.body.request_id;
     console.log("postVerifyUserTransaction: ~ request_id", request_id);
-
-    
 
     const payload = {
       request_id,
@@ -167,8 +179,19 @@ module.exports = {
 
     const verifyMeterNumber = await VTP_services.queryTransactionStatus(
       payload
-    );    
+    );
+  },
 
+  getComplaintsController: async (req, res, next) => {
+    const complaints = await Complaint.find();
+
+    res.render("admin/complaints", {
+      pageTitle: "User complaints",
+      path: "dashboard",
+      editing: false,
+      role: req.user.role,
+      complaints,
+    });
   },
 
   getDisabledProductsController: async (req, res, next) => {
