@@ -95,7 +95,7 @@ module.exports = {
       } else if (type === "Meter Type") {
         res.status(500).send({
           success: false,
-          message: "no metere type",
+          message: "no meter type",
         });
       } else if (verifyMeterNumber.error) {
         res.status(500).send({

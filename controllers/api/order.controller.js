@@ -4,19 +4,21 @@ dotenv.config();
 const T_Model = require("../../models/transaction.model");
 
 module.exports = {
-  getHistoryController: async (req, res, next) => {
+  postHistoryController: async (req, res, next) => {
     try {
-      const user = req.user?._id;
+      const email = req.body.email;
 
-      const orders = await T_Model.find({ user });
+      const orders = await T_Model.find({ email });
 
       return res.status(200).send({
         success: true,
         data: {
+          email,
           orders,
         },
       });
     } catch (err) {
+      console.log(err.message);
       res.status(500).send({
         success: false,
         message: err.message,

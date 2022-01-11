@@ -64,7 +64,9 @@ router.post("/contactUs", userController.postContactUsController);
 
 
 // ORDER APIs
-router.get("/history", orderController.getHistoryController);
+// router.get("/history", orderController.getHistoryController);
+
+router.post("/history", orderController.postHistoryController);
 
 router.post("/order", orderController.postOrderController);
 
@@ -73,6 +75,7 @@ router.get("/review", orderController.getReviewController);
 router.post("/review", orderController.reviewOrderController);
 
 router.get("/summary", orderController.getSummaryController);
+
 
 // AUTH APIs
 router.get("/login", authController.getLoginController);
