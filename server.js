@@ -14,9 +14,9 @@ require("./middlewares/passport");
 
 const port = process.env.PORT || 4000;
 
-// const MONGODB_URI = "mongodb://localhost:27017/utility";
-const MONGODB_URI =
-  "mongodb+srv://Edikan:pvsantakid@cluster0.qls1f.mongodb.net/utility";
+const MONGODB_URI = "mongodb://localhost:27017/utility";
+// const MONGODB_URI =
+  // "mongodb+srv://Edikan:pvsantakid@cluster0.qls1f.mongodb.net/utility";
 
 const app = express();
 const storeSession = new MongoDBStoreSession({
@@ -69,11 +69,13 @@ const errorController = require("./controllers/error.controller");
 const User = require("./models/user.model");
 
 const authRouter = require("./routes/auth.routes");
+const apiRouter = require("./routes/api.routes");
 const adminRouter = require("./routes/admin.routes");
 const userRouter = require("./routes/user.routes");
 const utilityRouter = require("./routes/utility.routes");
 const orderRouter = require("./routes/order.routes");
 const flutterwaveRouter = require("./routes/flutterwave.routes");
+
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -90,6 +92,7 @@ app.use((req, res, next) => {
 app.use("/", authRouter);
 app.use("/", userRouter);
 app.use("/", orderRouter);
+app.use("/api", apiRouter);
 app.use("/utility", utilityRouter);
 app.use("/payment", flutterwaveRouter);
 app.use("/admin", adminRouter);
