@@ -5,6 +5,8 @@ const moment = require("moment");
 const FLW_services = require("../services/flutterwave.services");
 const VTP_services = require("../services/vtpass.services");
 
+const sendMail = require("../services/mailer.services");
+
 const User = require("../models/user.model");
 const T_Model = require("../models/transaction.model");
 
@@ -29,6 +31,7 @@ module.exports = {
     console.log("Tx_ref in Get details controller: ", tx_ref.get_Tx_Ref());
 
     const distributors = await VTP_services.getServiceID();
+    
 
     res.render("order/meterDetails", {
       pageTitle: "order",
@@ -137,8 +140,8 @@ module.exports = {
       amount: newAmount,
       currency: currency,
       payment_options: "card",
-      // redirect_url: "http://localhost:4000/utility/verify",
-      redirect_url: "https://topapp-ng.herokuapp.com/utility/verify",
+      redirect_url: "http://localhost:4000/utility/verify",
+      // redirect_url: "https://topapp-ng.herokuapp.com/utility/verify",
       customer: {
         email: req.body.email,
         phonenumber: req.body.phone,
@@ -184,7 +187,7 @@ module.exports = {
 
   getVerifyController: async (req, res, next) => {
     const id = req.query.transaction_id;
-    console.log(" getVerifyController: ~ id:", id)
+    console.log(" getVerifyController: ~ id:", id);
     const tx_ref = req.query.tx_ref;
     const status = req.query.status;
 
@@ -195,10 +198,6 @@ module.exports = {
       " ~ file: utility.controller.js ~ line 148 ~ getVerifyController: ~ transaction",
       transaction
     );
-    // transaction.status = status;
-    // await transaction.save();
-
-    // console.log("transaction", transaction);
 
     const payload = {
       request_id: transaction.tx_ref,
@@ -219,6 +218,16 @@ module.exports = {
     transaction.status = newStatus;
     await transaction.save();
 
+    const user = req.session.user;
+
+    const mailOptions = {
+      to: user.email,
+      subject: "Payment confirmation",
+      html: `Hello ${user.username}, your transaction was successful, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
+    };
+
+    sendMail(mailOptions); 
+
     res.render("order/verify", {
       pageTitle: "Verify Payment",
       path: "summary",
@@ -227,5 +236,3 @@ module.exports = {
     });
   },
 };
-
-

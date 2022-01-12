@@ -6,7 +6,10 @@
     <% if (errorMessage) { %>
     <div class="user_message user_message_error"><%= errorMessage %></div>
     <% } %>
-    <h1 style="color: #005c2f">Sign Up</h1> <hr>
+    <h1 style="color: #005c2f">Sign Up</h1>
+    <a href="/google" class="btn btn-success"
+        ><span class="fa fa-google-plus"></span> Sign in with Google</a
+      > <hr>
     <form action="/signup" method="POST">
       <div class="my-3">
         <input type="text" name="username" id="username" placeholder="Username" style="border: 2px solid #02a355" />
