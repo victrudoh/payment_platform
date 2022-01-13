@@ -16,3 +16,9 @@
     background: rgb(255, 135, 135);
     color: black;
 }
+
+.user_message_success {
+    border-color: green;
+    background: rgb(21, 156, 66);
+    color: white;
+}

@@ -1,4 +1,10 @@
 const bcrypt = require("bcryptjs");
+const escapeStringRegexp = require("escape-string-regexp");
+const { v4: uuidv4 } = require("uuid");
+const moment = require("moment");
+const resetPasswordMail = require("../templates/resetPasswordMail.templates");
+const sendMail = require("../services/mailer.services");
+const url = require("url");
 
 const User = require("../models/user.model");
 
@@ -25,7 +31,6 @@ module.exports = {
     const user = await User.findOne({ email: email });
     if (!user) {
       req.flash("error", "Invalid email or password");
-       
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -194,7 +199,6 @@ module.exports = {
   // },
 
   getGoogleLoginController: async (req, res) => {
-
     const username = req.user.displayName;
     const email = req.user.email;
     const password = req.user.email;
@@ -234,5 +238,128 @@ module.exports = {
 
     return res.redirect("/profile");
   },
-  
+
+  getForgotPasswordController: async (req, res) => {
+    try {
+      let message = req.flash("error");
+      if (message.length > 0) {
+        message = message[0];
+      } else {
+        message = null;
+      }
+      res.render("auth/forgot_password", {
+        pageTitle: "Forgot password",
+        path: "profile",
+        role: req.user?.role,
+        errorMessage: message,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  postForgotPasswordController: async (req, res) => {
+    try {
+      const { email } = req.body;
+      const $regex = "^" + escapeStringRegexp(email) + "$";
+      const $options = "i";
+
+      const user = await User.findOne({
+        $or: [
+          { email: { $regex, $options } },
+          { username: { $regex, $options } },
+        ],
+      });
+
+      if (!user) {
+        req.flash("error", "This email is not linked to an account");
+        return res.redirect("/forgot_password");
+      }
+      const resetToken = uuidv4();
+      const expire = moment().add(15, "minutes").format("YYYY-MM-DD hh:mm:ss");
+
+      user.resetPasswordToken = resetToken;
+      user.resetPasswordExpires = expire;
+
+      await user.save();
+
+      const mailOptions = {
+        to: user.email,
+        subject: "Password Reset Mail",
+        html: resetPasswordMail(user.username, resetToken),
+        // html: `<h4>Hi ${user.username}, <br> <h4>click on the link below to reset your account password, or copy and paste the link into your preferred browser</h4> <br> <a href='http://localhost:4000/reset_password?token=${resetToken}'>${process.env.APP_URL}/reset_password?token=${resetToken}</a><br><br> <p>if you didn't initiate this request, please ignore this mail, or contact Admin for further support</p>`,
+      };
+
+      sendMail(mailOptions);
+      res.render("auth/success_message", {
+        pageTitle: "Password reset",
+        path: "profile",
+        role: req.user?.role,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  getResetPasswordController: async (req, res) => {
+    try {
+      let message = req.flash("error");
+      if (message.length > 0) {
+        message = message[0];
+      } else {
+        message = null;
+      }
+
+      const token = req.query.token;
+
+      res.render("auth/reset_password", {
+        pageTitle: "Reset password",
+        path: "profile",
+        role: req.user?.role,
+        errorMessage: message,
+        token,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  postResetPasswordController: async (req, res) => {
+    try {
+      const queyObject = url.parse(req.url, true).query;
+      console.log("postResetPasswordController: ~ queyObject", queyObject);
+
+      const { token, password } = req.body;
+      console.log("Req.body: ", req.body);
+      const pass = await bcrypt.hash(password, 12);
+      const t = moment().format("YYYY-MM-DD hh:mm:ss");
+      const time = new Date(t).getTime();
+
+      const user = await User.findOne({ resetPasswordToken: token });
+      console.log("postResetPasswordController: ~ user", user);
+      if (!user) {
+        req.flash("error", "Invalid link");
+        return res.redirect("/forgot_password");
+      }
+      if (time > new Date(user.resetPasswordExpires).getTime()) {
+        req.flash("error", "Oops, link has expired");
+        return res.redirect("/forgot_password");
+      }
+
+      user.password = pass;
+      user.resetPasswordToken = null;
+      user.resetPasswordExpires = null;
+
+      await user.save();
+      res.redirect("/login");
+
+      // res.status(200).send({
+      //   success: true,
+      //   message:
+      //     "Password changed successfully, please login to proceed to your dashboard",
+      // });
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

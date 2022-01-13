@@ -18,6 +18,14 @@ router.get("/signup", authController.getSignupController);
 
 router.post("/signup", authController.postSignupController);
 
+router.get("/forgot_password", authController.getForgotPasswordController);
+
+router.post("/forgot_password", authController.postForgotPasswordController);
+
+router.get("/reset_password", authController.getResetPasswordController);
+
+router.post("/reset_password", authController.postResetPasswordController);
+
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
