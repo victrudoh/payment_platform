@@ -58,6 +58,7 @@ module.exports = {
     const user = await User.findOne({ username: req.user.username });
 
     const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
+    console.log("~ verifyMeterNumber", verifyMeterNumber)
 
     if (serviceID === "Select Service Provider") {
       console.log("no service ID");
@@ -101,6 +102,7 @@ module.exports = {
     const user = await User.findOne({ username: req.user.username });
 
     const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
+    console.log(" verifyMeterNumber", verifyMeterNumber)
 
     if (serviceID === "Select Service Provider") {
       console.log("no service ID");
