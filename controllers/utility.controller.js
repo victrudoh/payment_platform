@@ -189,7 +189,7 @@ module.exports = {
 
   getVerifyController: async (req, res, next) => {
     const id = req.query.transaction_id;
-    console.log(" getVerifyController: ~ id:", id);
+    console.log("getVerifyController: ~ id:", id);
     const tx_ref = req.query.tx_ref;
     const status = req.query.status;
 
