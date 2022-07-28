@@ -42,32 +42,38 @@ module.exports = {
     };
 
     const user = await User.findOne({ username: req.user.username });
+    console.log("User", user);
 
     const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
+    console.log("verifyMeterNumber", verifyMeterNumber);
 
     if (serviceID === "Select Service Provider") {
       console.log("no service ID");
-      req.flash("error", "Please Select Service Provider");
-      return res.redirect("/utility/details");
+      res.status(400).send({
+        success: false,
+        message: "Please Select Service Provider",
+      });
     } else if (type === "Meter Type") {
       console.log("no metere type");
-      req.flash("error", "Please Select meter type");
-      return res.redirect("/utility/details");
+      res.status(400).send({
+        success: false,
+        message: "Please Select meter type",
+      });
     } else if (verifyMeterNumber.error) {
       console.log(verifyMeterNumber.error);
-      req.flash("error", "Invalid Meter Number. Please check and Try Again");
-      return res.redirect("/utility/details");
+      res.status(400).send({
+        success: false,
+        message: "Invalid Meter Number. Please check and Try Again",
+        error: verifyMeterNumber.error,
+      });
     }
 
-    res.render("order/buy", {
-      pageTitle: "order",
-      path: "order",
-      role: req.user?.role,
-      details: verifyMeterNumber,
-      user,
-      serviceID,
-      billersCode,
-      type,
+    return res.status(200).send({
+      success: true,
+      data: {
+        data: verifyMeterNumber,
+      },
+      message: "meter was found",
     });
   },
 
@@ -177,9 +183,9 @@ module.exports = {
         success: true,
         data: {
           response,
-        }
+          // transREf,
+        },
       });
-
     } catch (err) {
       res.status(500).send({
         success: false,
@@ -187,6 +193,48 @@ module.exports = {
       });
     }
   },
+
+  // getVerifyController: async (req, res, next) => {
+  //   try {
+  //     //     const request_id = req.body.request_id;
+  //     // const user_id = req.body.user_id;
+  //     const request_id = req.query.tx_ref;
+
+  //     const payload = {
+  //       request_id,
+  //     };
+
+  //     const verifyMeterNumber = await VTP_services.queryTransactionStatus(
+  //       payload
+  //     );
+
+  //     const updatedOrder = await T_Model.findOne({ tx_ref: request_id });
+  //     // const updatedOrder = await Order.findOne({ user: user_id });
+
+  //     updatedOrder.email = updatedOrder.email;
+  //     updatedOrder.fullname = updatedOrder.fullname;
+  //     updatedOrder.phone = updatedOrder.phone;
+  //     updatedOrder.tx_ref = updatedOrder.tx_ref;
+  //     updatedOrder.amount = updatedOrder.amount;
+  //     updatedOrder.currency = updatedOrder.currency;
+  //     updatedOrder.billersCode = updatedOrder.billersCode;
+  //     updatedOrder.serviceID = updatedOrder.serviceID;
+  //     updatedOrder.meterType = updatedOrder.meterType;
+  //     updatedOrder.status = updatedOrder.status;
+  //     updatedOrder.token = verifyMeterNumber.purchased_code;
+
+  //     await updatedOrder.save();
+  //     return res.status(200).send({
+  //       success: true,
+  //       data: updatedOrder,
+  //     });
+  //   } catch (err) {
+  //     res.status(500).send({
+  //       success: false,
+  //       message: err.message,
+  //     });
+  //   }
+  // },
 
   getVerifyController: async (req, res, next) => {
     try {
@@ -208,17 +256,17 @@ module.exports = {
       };
 
       const makePayment = await VTP_services.makePayment(payload);
-
-      const token = makePayment.Token;
+      const token = makePayment.token;
       const newStatus = makePayment.content.transactions.status;
 
       transaction.token = token;
       transaction.status = newStatus;
       await transaction.save();
+
       return res.status(200).send({
         success: true,
         data: {
-          makePayment,
+          transaction,
         },
       });
     } catch (err) {

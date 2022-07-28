@@ -83,6 +83,9 @@ module.exports = {
       const save = await user.save();
       return res.status(200).send({
         success: true,
+        data: {
+          user: user,
+        },
       });
     } catch (err) {
       res.status(500).send({
@@ -103,19 +106,35 @@ module.exports = {
 
       const userFound = await User.findOne({ email: email });
 
-      const user = await new User({
-        username: username,
-        email: email,
-        password: password,
-        gender: gender,
-        role: role,
-        picture: picture,
-      });
+      if (!userFound) {
+        const user = await new User({
+          username: username,
+          email: email,
+          password: password,
+          gender: gender,
+          role: role,
+          picture: picture,
+        });
 
-      const save = await user.save();
+        await user.save();
+      }
 
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        return res.status(404).send({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
       return res.status(200).send({
         success: true,
+        message: "Login successful",
+        data: {
+          user,
+          token,
+        },
       });
     } catch (err) {
       res.status(500).send({
@@ -123,6 +142,5 @@ module.exports = {
         message: err.message,
       });
     }
-
   },
 };

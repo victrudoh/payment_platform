@@ -3,6 +3,7 @@ const path = require("path");
 
 const passport = require("passport");
 require("../middlewares/passport");
+const { verifyToken } = require("../middlewares/authJwt");
 
 const authController = require("../controllers/auth.controller");
 
@@ -26,10 +27,15 @@ router.get("/reset_password", authController.getResetPasswordController);
 
 router.post("/reset_password", authController.postResetPasswordController);
 
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
-  function(req, res) {
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/failed" }),
+  function (req, res) {
     // Successful authentication, redirect home.
     res.redirect("/googleLogin");
   }
@@ -37,8 +43,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 
 router.get("/googleLogin", authController.getGoogleLoginController);
 
-
-router.get("/profile", authController.getProfileController);
+router.get("/profile", verifyToken, authController.getProfileController);
 
 router.get("/edit_profile", authController.getEditProfileController);
 
@@ -47,6 +52,5 @@ router.post("/edit_profile", authController.postEditProfileController);
 // router.post("/edit_profile", authController.postEditProfileController);
 
 // router.post("/profile", authController.getEditProfileController);
-
 
 module.exports = router;

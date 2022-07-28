@@ -231,6 +231,7 @@ module.exports = {
       );
 
       const updatedOrder = await Order.findOne({ tx_ref: request_id });
+      // const updatedOrder = await Order.findOne({ user: user_id });
 
       updatedOrder.email = updatedOrder.email;
       updatedOrder.fullname = updatedOrder.fullname;
@@ -247,6 +248,7 @@ module.exports = {
       await updatedOrder.save();
       return res.status(200).send({
         success: true,
+        data: updatedOrder,
       });
     } catch (err) {
       res.status(500).send({

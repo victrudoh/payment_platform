@@ -18,13 +18,40 @@ module.exports = {
 
   getProfileController: async (req, res, next) => {
     try {
+      const user = await User.findOne({ username: req.user.username });
       return res.status(200).send({
         success: true,
+        data: {
+          user: user,
+        },
       });
     } catch (err) {
       res.status(500).send({
         success: false,
-        message: err.message,
+        // message: err.message,
+        message: "Couldn't fetch user profile",
+      });
+    }
+  },
+
+  postDeleteAccountController: async (req, res, next) => {
+    try {
+      const userId = req.query.userId;
+      console.log("userId", userId);
+      const user = await User.findByIdAndDelete({ _id: userId });
+      console.log("Deleted user: ", user);
+      return res.status(200).send({
+        success: true,
+        message: "Deleted user",
+        // data: {
+        //   user: user,
+        // },
+      });
+    } catch (err) {
+      res.status(500).send({
+        success: false,
+        // message: err.message,
+        message: "Couldn't delete profile",
       });
     }
   },

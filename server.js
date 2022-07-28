@@ -15,9 +15,9 @@ require("./middlewares/passport");
 const port = process.env.PORT || 4000;
 
 // const MONGODB_URI = "mongodb://localhost:27017/utility";
-const MONGODB_URI = process.env.MDB_CONNECTION_STRING
+// const MONGODB_URI = process.env.MDB_CONNECTION_STRING
 // const MONGODB_URI = process.env.MDB_ATLAS;
-// const MONGODB_URI = process.env.MDB_COMPASS;
+const MONGODB_URI = process.env.MDB_COMPASS;
 
 const app = express();
 const storeSession = new MongoDBStoreSession({
@@ -77,7 +77,6 @@ const userRouter = require("./routes/user.routes");
 const utilityRouter = require("./routes/utility.routes");
 const orderRouter = require("./routes/order.routes");
 const flutterwaveRouter = require("./routes/flutterwave.routes");
-
 
 app.use((req, res, next) => {
   if (!req.session.user) {

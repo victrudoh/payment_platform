@@ -32,6 +32,7 @@
     "flutterwave-node-v3": "^1.0.9",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "mongodb": "^4.2.2",
     "mongoose": "^6.1.2",
     "morgan": "^1.10.0",
@@ -40,6 +41,5 @@
     "passport": "^0.5.2",
     "passport-google-oauth2": "^0.2.0",
     "uuid": "^8.3.2"
-  },
-  "devDependencies": {}
+  }
 }

@@ -31,7 +31,6 @@ module.exports = {
     console.log("Tx_ref in Get details controller: ", tx_ref.get_Tx_Ref());
 
     const distributors = await VTP_services.getServiceID();
-    
 
     res.render("order/meterDetails", {
       pageTitle: "order",
@@ -58,7 +57,7 @@ module.exports = {
     const user = await User.findOne({ username: req.user.username });
 
     const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
-    console.log("~ verifyMeterNumber", verifyMeterNumber)
+    console.log("~ verifyMeterNumber", verifyMeterNumber);
 
     if (serviceID === "Select Service Provider") {
       console.log("no service ID");
@@ -102,7 +101,7 @@ module.exports = {
     const user = await User.findOne({ username: req.user.username });
 
     const verifyMeterNumber = await VTP_services.verifyMeterNumber(payload);
-    console.log(" verifyMeterNumber", verifyMeterNumber)
+    console.log(" verifyMeterNumber", verifyMeterNumber);
 
     if (serviceID === "Select Service Provider") {
       console.log("no service ID");
@@ -188,53 +187,58 @@ module.exports = {
   },
 
   getVerifyController: async (req, res, next) => {
-    const id = req.query.transaction_id;
-    console.log("getVerifyController: ~ id:", id);
-    const tx_ref = req.query.tx_ref;
-    const status = req.query.status;
+    try {
+      const id = req.query.transaction_id;
+      console.log("getVerifyController: ~ id:", id);
+      const tx_ref = req.query.tx_ref;
+      const status = req.query.status;
 
-    const verify = await FLW_services.verifyTransaction(id);
+      const verify = await FLW_services.verifyTransaction(id);
 
-    const transaction = await T_Model.findOne({ tx_ref: tx_ref });
-    console.log(
-      " ~ file: utility.controller.js ~ line 148 ~ getVerifyController: ~ transaction",
-      transaction
-    );
+      const transaction = await T_Model.findOne({ tx_ref: tx_ref });
+      console.log(
+        " ~ file: utility.controller.js ~ line 148 ~ getVerifyController: ~ transaction",
+        transaction
+      );
 
-    const payload = {
-      request_id: transaction.tx_ref,
-      serviceID: transaction.serviceID,
-      billersCode: transaction.billersCode,
-      variation_code: transaction.meterType,
-      amount: transaction.amount,
-      phone: transaction.phone,
-    };
+      const payload = {
+        request_id: transaction.tx_ref,
+        serviceID: transaction.serviceID,
+        billersCode: transaction.billersCode,
+        variation_code: transaction.meterType,
+        amount: transaction.amount,
+        phone: transaction.phone,
+      };
 
-    const makePayment = await VTP_services.makePayment(payload);
-    console.log("makePayment", makePayment);
+      const makePayment = await VTP_services.makePayment(payload);
+      
+      console.log("makePayment", makePayment);
 
-    const token = makePayment.Token;
-    const newStatus = makePayment.content.transactions.status;
+      const token = makePayment.Token;
+      const newStatus = makePayment.content.transactions.status;
 
-    transaction.token = token;
-    transaction.status = newStatus;
-    await transaction.save();
+      transaction.token = token;
+      transaction.status = newStatus;
+      await transaction.save();
 
-    const user = req.session.user;
+      const user = req.session.user;
 
-    const mailOptions = {
-      to: user.email,
-      subject: "Payment confirmation",
-      html: `Hello ${user.username}, your transaction was successful, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
-    };
+      const mailOptions = {
+        to: user.email,
+        subject: "Payment confirmation",
+        html: `Hello ${user.username}, your transaction was successful, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
+      };
 
-    sendMail(mailOptions); 
+      sendMail(mailOptions);
 
-    res.render("order/verify", {
-      pageTitle: "Verify Payment",
-      path: "summary",
-      role: req.user?.role,
-      makePayment,
-    });
+      res.render("order/verify", {
+        pageTitle: "Verify Payment",
+        path: "summary",
+        role: req.user?.role,
+        makePayment,
+      });
+    } catch (err) {
+      console.log(err.body);
+    }
   },
 };

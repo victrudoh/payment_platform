@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config();
 const VTP_username = process.env.VTPASS_USERNAME;
 const VTP_password = process.env.VTPASS_PASSWORD;
 const VTP_baseURL = process.env.VTPASS_BASE_URL;
+// const VTP_baseURL = process.env.VTPASS_DEMO_BASE_URL;
 
 const options = {
   timeout: 1000 * 60,
@@ -32,35 +33,41 @@ const getServiceID = async () => {
 
 const verifyMeterNumber = async (payload) => {
   try {
-    const response = await axios.post(`${VTP_baseURL}/merchant-verify`, payload, options);
+    const response = await axios.post(
+      `${VTP_baseURL}/merchant-verify`,
+      payload,
+      options
+    );
     // console.log("verifyMeterNumber: ", response.data.content);
     return response.data.content;
   } catch (err) {
     console.log(err);
-  }  
-}
+  }
+};
 
 const makePayment = async (payload) => {
   try {
     const response = await axios.post(`${VTP_baseURL}/pay`, payload, options);
-    console.log("makePayment: ", response.data);
+    console.log("makePayment First: ", response);
     return response.data;
   } catch (err) {
     console.log(err);
-  }  
-}
+  }
+};
 
 const queryTransactionStatus = async (payload) => {
   try {
-    const response = await axios.post(`${VTP_baseURL}/requery`, payload, options);
+    const response = await axios.post(
+      `${VTP_baseURL}/requery`,
+      payload,
+      options
+    );
     console.log("queryTransactionStatus: ", response.data);
     return response.data;
   } catch (err) {
     console.log(err);
-  }  
-}
-
-
+  }
+};
 
 module.exports = {
   getServiceID,
