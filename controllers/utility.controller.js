@@ -142,7 +142,7 @@ module.exports = {
       currency: currency,
       payment_options: "card",
       // redirect_url: "http://localhost:4000/utility/verify",
-      redirect_url: "https://topapp-ng.herokuapp.com/utility/verify",
+      redirect_url: "https://topapp.ng/utility/verify",
       customer: {
         email: req.body.email,
         phonenumber: req.body.phone,
