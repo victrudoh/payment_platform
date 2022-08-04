@@ -15,7 +15,7 @@ const get_Tx_Ref = () => {
 
   const time2 = moment1().tz("Africa/Lagos").format("YYYY-MM-DD HH:MM:SS");
   const time3 = time2.replace(/[\-]|[\s]|[\:]/g, "");
-  console.log("time2", time3);
+  // console.log("time2", time3);
   tx_ref = time3;
 
   // console.log("time", time1);
@@ -31,7 +31,7 @@ const get_Tx_Ref = () => {
 
   // tx_ref = time1;
 
-  console.log("tx_ref", tx_ref);
+  // console.log("tx_ref", tx_ref);
 
   return tx_ref;
 };

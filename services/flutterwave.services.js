@@ -5,12 +5,12 @@ require("dotenv").config();
 const Flutterwave = require("flutterwave-node-v3");
 
 const baseURL = process.env.FLUTTERWAVE_BASE_URL;
-const FLW_pubKey = process.env.FLUTTERWAVE_PUBLIC_KEY;
-const FLW_secKey = process.env.FLUTTERWAVE_SECRET_KEY;
+// const FLW_pubKey = process.env.FLUTTERWAVE_PUBLIC_KEY;
+// const FLW_secKey = process.env.FLUTTERWAVE_SECRET_KEY;
 
 // TEST Mode
-// const FLW_pubKey = process.env.FLUTTERWAVE_TEST_PUBLIC_KEY;
-// const FLW_secKey = process.env.FLUTTERWAVE_TEST_SECRET_KEY;
+const FLW_pubKey = process.env.FLUTTERWAVE_TEST_PUBLIC_KEY;
+const FLW_secKey = process.env.FLUTTERWAVE_TEST_SECRET_KEY;
 
 const flw = new Flutterwave(FLW_pubKey, FLW_secKey);
 
@@ -39,7 +39,7 @@ const verifyTransaction = async (id) => {
       options
     );
     console.log("verify: ", response.data);
-    return response.data.data.link;
+    return response.data.data;
   } catch (err) {
     console.log(err);
   }

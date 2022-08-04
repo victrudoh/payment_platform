@@ -3,8 +3,8 @@ const dotenv = require("dotenv").config();
 
 const VTP_username = process.env.VTPASS_USERNAME;
 const VTP_password = process.env.VTPASS_PASSWORD;
-const VTP_baseURL = process.env.VTPASS_BASE_URL;
-// const VTP_baseURL = process.env.VTPASS_DEMO_BASE_URL;
+// const VTP_baseURL = process.env.VTPASS_BASE_URL;
+const VTP_baseURL = process.env.VTPASS_DEMO_BASE_URL;
 
 const options = {
   timeout: 1000 * 60,

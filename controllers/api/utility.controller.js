@@ -141,6 +141,7 @@ module.exports = {
         currency: currency,
         payment_options: "card",
         redirect_url: "https://topapp.ng/utility/verify",
+        // redirect_url: "http://localhost:4000/utility/verify",
         customer: {
           email: req.body.email,
           phonenumber: req.body.phone,
@@ -244,31 +245,46 @@ module.exports = {
 
       const verify = await FLW_services.verifyTransaction(id);
 
-      const transaction = await T_Model.findOne({ tx_ref: tx_ref });
+      if (verify.status === "successful") {
+        const transaction = await T_Model.findOne({ tx_ref: tx_ref });
 
-      const payload = {
-        request_id: transaction.tx_ref,
-        serviceID: transaction.serviceID,
-        billersCode: transaction.billersCode,
-        variation_code: transaction.meterType,
-        amount: transaction.amount,
-        phone: transaction.phone,
-      };
+        const payload = {
+          request_id: transaction.tx_ref,
+          serviceID: transaction.serviceID,
+          billersCode: transaction.billersCode,
+          variation_code: transaction.meterType,
+          amount: transaction.amount,
+          phone: transaction.phone,
+        };
 
-      const makePayment = await VTP_services.makePayment(payload);
-      const token = makePayment.token;
-      const newStatus = makePayment.content.transactions.status;
+        const makePayment = await VTP_services.makePayment(payload);
 
-      transaction.token = token;
-      transaction.status = newStatus;
-      await transaction.save();
+        if (makePayment.data.response_description !== "TRANSACTION FAILED") {
+          const token = makePayment?.token;
+          const newStatus = makePayment?.content.transactions.status;
 
-      return res.status(200).send({
-        success: true,
-        data: {
-          transaction,
-        },
-      });
+          transaction.token = token;
+          transaction.status = newStatus;
+          await transaction.save();
+
+          return res.status(200).send({
+            success: true,
+            data: {
+              transaction,
+            },
+          });
+        } else {
+          res.status(500).send({
+            success: false,
+            message: "transaction was not successful",
+          });
+        }
+      } else {
+        res.status(500).send({
+          success: false,
+          message: "Payment was not successful",
+        });
+      }
     } catch (err) {
       res.status(500).send({
         success: false,
