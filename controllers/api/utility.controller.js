@@ -3,6 +3,9 @@ const dotenv = require("dotenv").config();
 
 const FLW_services = require("../../services/flutterwave.services");
 const VTP_services = require("../../services/vtpass.services");
+const BAXI_services = require("../../services/baxibox.services");
+
+const sendMail = require("../../services/mailer.services");
 
 const User = require("../../models/user.model");
 const T_Model = require("../../models/transaction.model");
@@ -13,11 +16,13 @@ module.exports = {
   getDetailsController: async (req, res, next) => {
     try {
       const distributors = await VTP_services.getServiceID();
+      // const distributors = await BAXI_services.getElectricityBillers();
 
       return res.status(200).send({
         success: true,
         data: {
           distributors,
+          // distributors: distributors.data.data.providers,
         },
       });
     } catch (err) {
@@ -195,48 +200,6 @@ module.exports = {
     }
   },
 
-  // getVerifyController: async (req, res, next) => {
-  //   try {
-  //     //     const request_id = req.body.request_id;
-  //     // const user_id = req.body.user_id;
-  //     const request_id = req.query.tx_ref;
-
-  //     const payload = {
-  //       request_id,
-  //     };
-
-  //     const verifyMeterNumber = await VTP_services.queryTransactionStatus(
-  //       payload
-  //     );
-
-  //     const updatedOrder = await T_Model.findOne({ tx_ref: request_id });
-  //     // const updatedOrder = await Order.findOne({ user: user_id });
-
-  //     updatedOrder.email = updatedOrder.email;
-  //     updatedOrder.fullname = updatedOrder.fullname;
-  //     updatedOrder.phone = updatedOrder.phone;
-  //     updatedOrder.tx_ref = updatedOrder.tx_ref;
-  //     updatedOrder.amount = updatedOrder.amount;
-  //     updatedOrder.currency = updatedOrder.currency;
-  //     updatedOrder.billersCode = updatedOrder.billersCode;
-  //     updatedOrder.serviceID = updatedOrder.serviceID;
-  //     updatedOrder.meterType = updatedOrder.meterType;
-  //     updatedOrder.status = updatedOrder.status;
-  //     updatedOrder.token = verifyMeterNumber.purchased_code;
-
-  //     await updatedOrder.save();
-  //     return res.status(200).send({
-  //       success: true,
-  //       data: updatedOrder,
-  //     });
-  //   } catch (err) {
-  //     res.status(500).send({
-  //       success: false,
-  //       message: err.message,
-  //     });
-  //   }
-  // },
-
   getVerifyController: async (req, res, next) => {
     try {
       const id = req.query.transaction_id;
@@ -247,36 +210,69 @@ module.exports = {
 
       if (verify.status === "successful") {
         const transaction = await T_Model.findOne({ tx_ref: tx_ref });
+        console.log("transaction: ", transaction);
 
-        const payload = {
-          request_id: transaction.tx_ref,
-          serviceID: transaction.serviceID,
-          billersCode: transaction.billersCode,
-          variation_code: transaction.meterType,
-          amount: transaction.amount,
-          phone: transaction.phone,
-        };
+        if (transaction) {
+          const payload = {
+            request_id: transaction.tx_ref,
+            serviceID: transaction.serviceID,
+            billersCode: transaction.billersCode,
+            variation_code: transaction.meterType,
+            amount: transaction.amount,
+            phone: transaction.phone,
+          };
 
-        const makePayment = await VTP_services.makePayment(payload);
+          const makePayment = await VTP_services.makePayment(payload);
+          console.log("makePayment: ", makePayment.data.response_description);
 
-        if (makePayment.data.response_description !== "TRANSACTION FAILED") {
-          const token = makePayment?.token;
-          const newStatus = makePayment?.content.transactions.status;
+          if (makePayment.data.response_description === "TRANSACTION FAILED") {
+            res.status(500).send({
+              success: false,
+              message: "TRANSACTION FAILED",
+            });
+          } else if (
+            makePayment.data.response_description === "REQUEST ID ALREADY EXIST"
+          ) {
+            res.status(500).send({
+              success: false,
+              message: "A Transaction with this ID Already exists",
+            });
+          } else if (
+            makePayment.data.response_description === "TRANSACTION SUCCESSFUL"
+          ) {
+            const token = makePayment.data.token;
+            const units = makePayment.data.units;
 
-          transaction.token = token;
-          transaction.status = newStatus;
-          await transaction.save();
+            transaction.token = token;
+            transaction.units = units;
+            transaction.status = "successful";
+            await transaction.save();
 
-          return res.status(200).send({
-            success: true,
-            data: {
-              transaction,
-            },
-          });
+            const mailOptions = {
+              to: transaction.email,
+              subject: "Payment confirmation",
+              html: `Hello, your transaction was successful. You purchased ${units} units, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
+            };
+
+            await sendMail(mailOptions);
+
+            return res.status(200).send({
+              success: true,
+              data: {
+                transaction,
+              },
+              message: "transaction successful",
+            });
+          } else {
+            res.status(400).send({
+              success: false,
+              message: makePayment.data.response_description,
+            });
+          }
         } else {
-          res.status(500).send({
+          res.status(400).send({
             success: false,
-            message: "transaction was not successful",
+            message: "Transaction not found",
           });
         }
       } else {
@@ -286,6 +282,30 @@ module.exports = {
         });
       }
     } catch (err) {
+      console.log("EERROOOORR: ", err);
+      res.status(500).send({
+        success: false,
+        message: "Oops! Something is wrong",
+        // message: err.message,
+      });
+    }
+  },
+
+  getBaxiLoginController: async (req, res, next) => {
+    try {
+      console.log("baxi");
+
+      const categories = await BAXI_services.getElectricityBillers();
+      console.log("getBaxiLoginController: ~ categories", categories.data.data);
+
+      return res.status(200).send({
+        success: true,
+        data: {
+          categories: categories.data.data.providers,
+        },
+      });
+    } catch (err) {
+      console.log(err.response);
       res.status(500).send({
         success: false,
         message: err.message,

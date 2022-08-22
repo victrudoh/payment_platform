@@ -38,7 +38,7 @@ const TransactionSchema = new Schema(
       required: true,
     },
     billersCode: {
-      type: Number,
+      type: String,
       required: true,
     },
     serviceID: {
@@ -51,7 +51,10 @@ const TransactionSchema = new Schema(
     },
     token: {
       type: String,
-      defaultValue: "confirm payment to get token"
+      defaultValue: "confirm payment to get token",
+    },
+    units: {
+      type: String,
     },
     status: {
       type: String,
@@ -70,6 +73,5 @@ TransactionSchema.method("toJSON", function () {
 
   return newObject;
 });
-
 
 module.exports = mongoose.model("Transaction", TransactionSchema);

@@ -5,13 +5,11 @@ dotenv.config();
 const T_Model = require("../models/transaction.model");
 
 module.exports = {
-
   getHistoryController: async (req, res, next) => {
-
-    console.log("USer: ", req.user);
+    // console.log("USer: ", req.user);
     const user = req.user?._id;
 
-    const orders = await T_Model.find({ user });
+    const orders = await T_Model.find({ user: user });
 
     res.render("order/history", {
       pageTitle: "Transactions history",

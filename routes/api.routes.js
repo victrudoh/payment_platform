@@ -16,6 +16,9 @@ const { verifyToken } = require("../middlewares/authJwt");
 
 const router = express.Router();
 
+// BAXI ROUTES
+router.get("/baxi", utilityController.getBaxiLoginController);
+
 // ADMIN APIs
 router.get(
   "/dashboard",

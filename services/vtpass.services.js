@@ -3,13 +3,14 @@ const dotenv = require("dotenv").config();
 
 const VTP_username = process.env.VTPASS_USERNAME;
 const VTP_password = process.env.VTPASS_PASSWORD;
-// const VTP_baseURL = process.env.VTPASS_BASE_URL;
-const VTP_baseURL = process.env.VTPASS_DEMO_BASE_URL;
+const VTP_baseURL = process.env.VTPASS_BASE_URL;
+// const VTP_baseURL = process.env.VTPASS_DEMO_BASE_URL;
 
 const options = {
   timeout: 1000 * 60,
   headers: {
     "content-type": "application/json",
+    "Keep-Alive": (timeout = 5), //max=1000,
     Authorization:
       "Basic " +
       new Buffer.from(VTP_username + ":" + VTP_password, "utf8").toString(
@@ -49,7 +50,8 @@ const makePayment = async (payload) => {
   try {
     const response = await axios.post(`${VTP_baseURL}/pay`, payload, options);
     console.log("makePayment First: ", response);
-    return response.data;
+    // return response.data;
+    return response;
   } catch (err) {
     console.log(err);
   }

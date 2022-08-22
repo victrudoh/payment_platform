@@ -98,7 +98,7 @@ module.exports = {
     });
 
     const save = await user.save();
-z
+
     return res.redirect("/login");
   },
 

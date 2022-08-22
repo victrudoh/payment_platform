@@ -4,6 +4,7 @@ const moment = require("moment");
 
 const FLW_services = require("../services/flutterwave.services");
 const VTP_services = require("../services/vtpass.services");
+const BAXI_services = require("../services/baxibox.services");
 
 const sendMail = require("../services/mailer.services");
 
@@ -31,6 +32,7 @@ module.exports = {
     console.log("Tx_ref in Get details controller: ", tx_ref.get_Tx_Ref());
 
     const distributors = await VTP_services.getServiceID();
+    // const distributors = await BAXI_services.getElectricityBillers();
 
     res.render("order/meterDetails", {
       pageTitle: "order",
@@ -38,6 +40,7 @@ module.exports = {
       role: req.user?.role,
       errorMessage: message,
       distributors,
+      // distributors: distributors.data.data.providers,
     });
   },
 
@@ -189,17 +192,12 @@ module.exports = {
   getVerifyController: async (req, res, next) => {
     try {
       const id = req.query.transaction_id;
-      console.log("getVerifyController: ~ id:", id);
       const tx_ref = req.query.tx_ref;
       const status = req.query.status;
 
       const verify = await FLW_services.verifyTransaction(id);
 
       const transaction = await T_Model.findOne({ tx_ref: tx_ref });
-      console.log(
-        " ~ file: utility.controller.js ~ line 148 ~ getVerifyController: ~ transaction",
-        transaction
-      );
 
       const payload = {
         request_id: transaction.tx_ref,
@@ -211,22 +209,21 @@ module.exports = {
       };
 
       const makePayment = await VTP_services.makePayment(payload);
-      
+
       console.log("makePayment", makePayment);
 
-      const token = makePayment.Token;
-      const newStatus = makePayment.content.transactions.status;
-
-      transaction.token = token;
-      transaction.status = newStatus;
-      await transaction.save();
-
+      const token = makePayment.token;
       const user = req.session.user;
 
+      transaction.token = token;
+      transaction.units = units;
+      transaction.status = "successful";
+      await transaction.save();
+
       const mailOptions = {
-        to: user.email,
+        to: transaction.email,
         subject: "Payment confirmation",
-        html: `Hello ${user.username}, your transaction was successful, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
+        html: `Hello ${user.username}, your transaction was successful. You purchased ${units} units, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
       };
 
       sendMail(mailOptions);
