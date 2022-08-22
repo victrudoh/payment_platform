@@ -189,6 +189,56 @@ module.exports = {
     return res.redirect(response);
   },
 
+  // getVerifyController: async (req, res, next) => {
+  //   try {
+  //     const id = req.query.transaction_id;
+  //     const tx_ref = req.query.tx_ref;
+  //     const status = req.query.status;
+
+  //     const verify = await FLW_services.verifyTransaction(id);
+
+  //     const transaction = await T_Model.findOne({ tx_ref: tx_ref });
+
+  //     const payload = {
+  //       request_id: transaction.tx_ref,
+  //       serviceID: transaction.serviceID,
+  //       billersCode: transaction.billersCode,
+  //       variation_code: transaction.meterType,
+  //       amount: transaction.amount,
+  //       phone: transaction.phone,
+  //     };
+
+  //     const makePayment = await VTP_services.makePayment(payload);
+
+  //     console.log("makePayment", makePayment);
+
+  //     const token = makePayment.token;
+  //     const user = req.session.user;
+
+  //     transaction.token = token;
+  //     transaction.units = units;
+  //     transaction.status = "successful";
+  //     await transaction.save();
+
+  //     const mailOptions = {
+  //       to: transaction.email,
+  //       subject: "Payment confirmation",
+  //       html: `Hello ${user.username}, your transaction was successful. You purchased ${units} units, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
+  //     };
+
+  //     sendMail(mailOptions);
+
+  //     res.render("order/verify", {
+  //       pageTitle: "Verify Payment",
+  //       path: "summary",
+  //       role: req.user?.role,
+  //       makePayment,
+  //     });
+  //   } catch (err) {
+  //     console.log(err.body);
+  //   }
+  // },
+
   getVerifyController: async (req, res, next) => {
     try {
       const id = req.query.transaction_id;
@@ -197,45 +247,85 @@ module.exports = {
 
       const verify = await FLW_services.verifyTransaction(id);
 
-      const transaction = await T_Model.findOne({ tx_ref: tx_ref });
+      if (verify.status === "successful") {
+        const transaction = await T_Model.findOne({ tx_ref: tx_ref });
 
-      const payload = {
-        request_id: transaction.tx_ref,
-        serviceID: transaction.serviceID,
-        billersCode: transaction.billersCode,
-        variation_code: transaction.meterType,
-        amount: transaction.amount,
-        phone: transaction.phone,
-      };
+        if (transaction) {
+          const payload = {
+            request_id: transaction.tx_ref,
+            serviceID: transaction.serviceID,
+            billersCode: transaction.billersCode,
+            variation_code: transaction.meterType,
+            amount: transaction.amount,
+            phone: transaction.phone,
+          };
 
-      const makePayment = await VTP_services.makePayment(payload);
+          const makePayment = await VTP_services.makePayment(payload);
 
-      console.log("makePayment", makePayment);
+          if (makePayment.data.response_description === "TRANSACTION FAILED") {
+            res.status(500).send({
+              success: false,
+              message: "TRANSACTION FAILED",
+            });
+          } else if (
+            makePayment.data.response_description === "REQUEST ID ALREADY EXIST"
+          ) {
+            res.status(500).send({
+              success: false,
+              message: "A Transaction with this ID Already exists",
+            });
+          } else if (
+            makePayment.data.response_description === "TRANSACTION SUCCESSFUL"
+          ) {
+            const token = makePayment.data.token;
+            const units = makePayment.data.units;
+            const user = req.session.user;
 
-      const token = makePayment.token;
-      const user = req.session.user;
+            transaction.token = token;
+            transaction.units = units;
+            transaction.status = "successful";
+            await transaction.save();
 
-      transaction.token = token;
-      transaction.units = units;
-      transaction.status = "successful";
-      await transaction.save();
+            const mailOptions = {
+              to: transaction.email,
+              subject: "Payment confirmation",
+              html: `Hello ${user.username}, your transaction was successful. You purchased ${units} units, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
+            };
 
-      const mailOptions = {
-        to: transaction.email,
-        subject: "Payment confirmation",
-        html: `Hello ${user.username}, your transaction was successful. You purchased ${units} units, here is your token; <br/> <b>${token}</b>. <br/> Thanks for your patronage.`,
-      };
+            sendMail(mailOptions);
 
-      sendMail(mailOptions);
-
-      res.render("order/verify", {
-        pageTitle: "Verify Payment",
-        path: "summary",
-        role: req.user?.role,
-        makePayment,
-      });
+            res.render("order/verify", {
+              pageTitle: "Verify Payment",
+              path: "summary",
+              role: req.user?.role,
+              makePayment,
+              transaction,
+            });
+          } else {
+            res.status(400).send({
+              success: false,
+              message: makePayment.data.response_description,
+            });
+          }
+        } else {
+          res.status(400).send({
+            success: false,
+            message: "Transaction not found",
+          });
+        }
+      } else {
+        res.status(500).send({
+          success: false,
+          message: "Payment was not successful",
+        });
+      }
     } catch (err) {
-      console.log(err.body);
+      console.log("EERROOOORR: ", err);
+      res.status(500).send({
+        success: false,
+        message: "Oops! Something is wrong",
+        message11: err.message,
+      });
     }
   },
 };
